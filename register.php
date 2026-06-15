@@ -1,5 +1,44 @@
 <?php
-       // backend logic goes here
+    //    $_SESSION_start();
+    include 'db_connect.php';
+       if($_SERVER["REQUEST_METHOD"]== "POST"){
+        
+        $email = $_POST['email'];
+        $password = $_POST['pswd'];
+        $cpassword = $_POST['cpswd'];
+        $role = $_POST['role'];
+        if($password != $cpassword){
+            echo "password does not match";
+        }
+        if(empty($email)|| empty($password)|| empty($cpassword) || empty($role)){
+            echo "all field are required";
+        }
+        else{
+        
+        $hpassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = "SELECT * FROM users WHERE Email = '$email'";
+        $result = mysqli_query($conn, $query);
+        
+    if (mysqli_num_rows($result)>0) {
+        echo"Email already Registered";
+    }
+    else{
+        $insert_query="INSERT INTO users (Email, Password, Role) values('$email', '$hpassword', '$role')";
+        mysqli_query($conn, $insert_query);
+    
+    if(mysqli_query($conn, $insert_query)){
+        echo "Account Created Sussfully";
+        header("location: login.php");
+        exit();
+    }
+    else{
+        echo "Error:".mysqli_error($conn);
+    }
+
+       }
+        }
+       }
         
 ?>
 
@@ -24,18 +63,12 @@
 
         <h2 class="text-center mb-4">Register</h2>
 
-        <form action="" method="post">
+        <form action="register.php" method="post">
 
             <div class="mb-3">
-                <label for="fname" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="fname" name="fname">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email">
             </div>
-
-            <div class="mb-3">
-                <label for="lname" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lname" name="lname">
-            </div>
-
             <div class="mb-3">
                 <label for="pswd" class="form-label">Password</label>
                 <input type="password" class="form-control" id="pswd" name="pswd">
