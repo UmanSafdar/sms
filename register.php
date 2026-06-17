@@ -1,5 +1,5 @@
 <?php
-    //    $_SESSION_start();
+    
     include 'db_connect.php';
        if($_SERVER["REQUEST_METHOD"]== "POST"){
         
@@ -25,11 +25,11 @@
     }
     else{
         $insert_query="INSERT INTO users (Email, Password, Role) values('$email', '$hpassword', '$role')";
-        mysqli_query($conn, $insert_query);
+        $r =mysqli_query($conn, $insert_query);
     
-    if(mysqli_query($conn, $insert_query)){
+    if($r){
         echo "Account Created Sussfully";
-        header("location: login.php");
+        // header("location: login.php");
         exit();
     }
     else{

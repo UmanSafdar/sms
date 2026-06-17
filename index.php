@@ -9,6 +9,6 @@
     <?php
     include 'navbar.php'
     ?>
-    <<img src="" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+    <img src="Images/sch.jpg" width="720px" height="0px" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
 </body>
 </html>

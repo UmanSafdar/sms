@@ -1,3 +1,59 @@
+<?php
+        session_start();
+        include 'db_connect.php';
+        //checking login info is submit
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            // getting form data and removing extra spaces
+            $email = trim($_POST['email']); 
+            $pswd = trim($_POST['pswd']); 
+        // checking that field are filled
+        if(empty($email) || empty($pswd)){
+            echo "Please fill all fields";
+            exit();
+        }
+        $sql = "SELECT * FROM users WHERE Email = '$email'";
+        $result = mysqli_query($conn, $sql);
+        // checking email id exits in database or not
+        if(mysqli_num_rows($result)==0){
+            echo "user does not exist";
+            exit();
+        }
+        
+            $row = mysqli_fetch_assoc($result);
+        
+        
+        // password verifcation
+        if(password_verify($pswd, $row['Password'])){
+            
+        // storing user info by using session
+        
+        $_SESSION['email'] = $row['Email'];
+        $_SESSION['role'] = $row['Role'];
+        if($row['Role']== "admin"){
+            header("Location: Admin_dashboard.php");
+        exit();
+        }
+         if($row['Role']== "teacher"){
+            header("Location: Teacher_dashboard.php");
+        exit();
+        }
+         if($row['Role']== "student"){
+            header("Location: Student_dashboard.php");
+        exit();
+        }
+            
+        }
+        else{
+    echo "Incorrect Password";
+    exit();
+}
+ }
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,12 +83,12 @@
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email ID</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <input type="email" class="form-control" required id="email" name="email">
                     </div>
 
                     <div class="mb-3">
                         <label for="pswd" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="pswd" name="pswd">
+                        <input type="password" required class="form-control" id="pswd" name="pswd">
                     </div>
 
                     <div class="d-grid">
