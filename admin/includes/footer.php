@@ -6,9 +6,10 @@
     <title>School Management System</title>
 </head>
 <body>
-    <?php
-    include 'navbar.php'
-    ?>
-    <img src="Images/sch.jpg" width="720px" height="0px" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
+    <footer class="text-center mt-5 py-3 border-top">
+    <p class="mb-0">
+        © <?php echo date('Y'); ?> School Management System
+    </p>
+</footer>
 </body>
 </html>

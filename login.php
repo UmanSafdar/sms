@@ -30,15 +30,15 @@
         $_SESSION['email'] = $row['Email'];
         $_SESSION['role'] = $row['Role'];
         if($row['Role']== "admin"){
-            header("Location: Admin_dashboard.php");
+            header("Location: admin/Admin_dashboard.php");
         exit();
         }
          if($row['Role']== "teacher"){
-            header("Location: Teacher_dashboard.php");
+            header("Location: admin/Teacher_dashboard.php");
         exit();
         }
          if($row['Role']== "student"){
-            header("Location: Student_dashboard.php");
+            header("Location: admin/Student_dashboard.php");
         exit();
         }
             
@@ -65,6 +65,7 @@
 </head>
 <body>
     <?php
+    
     include 'navbar.php'
     ?>
  <h1 class="text-center mt-5 fs-1">School Management System</h1>
