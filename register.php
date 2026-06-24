@@ -19,12 +19,12 @@
 
         $query = "SELECT * FROM users WHERE Email = '$email'";
         $result = mysqli_query($conn, $query);
-        
+       
     if (mysqli_num_rows($result)>0) {
         echo"Email already Registered";
     }
     else{
-        $insert_query="INSERT INTO users (Email, Password, Role) values('$email', '$hpassword', '$role')";
+        $insert_query="INSERT INTO users (Email, Password, Role,status) values('$email', '$hpassword', '$role', 'pending')";
         $r =mysqli_query($conn, $insert_query);
     
     if($r){
@@ -41,9 +41,6 @@
        }
         
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

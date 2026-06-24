@@ -1,4 +1,7 @@
 <?php
+
+
+
         session_start();
         include 'db_connect.php';
         //checking login info is submit
@@ -24,6 +27,10 @@
         
         // password verifcation
         if(password_verify($pswd, $row['Password'])){
+            // Check if the account has been approved by the admin
+            if ($row['status'] !== 'approved') {
+                echo "Your account is currently pending admin approval.";
+                exit();}
             
         // storing user info by using session
         

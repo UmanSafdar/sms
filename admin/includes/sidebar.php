@@ -59,7 +59,7 @@
             Settings
         </a>
 
-        <a href="logout.php"
+        <a href="/MY_SMS/logout.php"
            class="list-group-item list-group-item-action bg-danger text-white">
             Logout
         </a>

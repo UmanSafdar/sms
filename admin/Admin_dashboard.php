@@ -1,3 +1,22 @@
+<?php
+        session_start();
+        include '../db_connect.php';
+        if(!isset($_SESSION['role'])|| $_SESSION['role'] != 'admin'){
+            header("Location: login.php");
+            exit();
+        }
+        if(isset($_GET['approve_id'])){
+            $approve_id = intval($_GET['approve_id']);
+            $update_sql = "UPDATE users SET status = 'approved' WHERE Id=$approve_id";
+            mysqli_query($conn,$update_sql);
+            header("Location: Admin_dashboard.php?msg=User approved Successfylly");
+            exit();
+
+        }
+        $sql = "SELECT Id, Email, Role FROM users WHERE status = 'pending'";
+        $result = mysqli_query($conn, $sql);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +27,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-
 <div class="container-fluid">
     <div class="row">
-
         <?php include 'includes/sidebar.php'; ?>
 
         <div class="col-md-9 col-lg-10">
@@ -100,6 +117,25 @@
                     </div>
                 </div>
 
+            </div>
+            <div class="card-body">
+                <h5 style="text-align: center;"> Registeration Requests</h5>
+                <table class="table table-striped">
+    <tbody>
+    <?php while($row = mysqli_fetch_assoc($result)): ?>
+        <tr> 
+            <td><?php echo $row['Id']; ?></td>
+            <td><?php echo $row['Email']; ?></td>
+            <td><?php echo $row['Role']; ?></td>
+            <td>
+                <a href="Admin_dashboard.php?approve_id=<?php echo $row['Id']; ?>" class="btn btn-success btn-sm">
+                    Approve User
+                </a>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+</tbody>
+                </table>
             </div>
 
             <?php include 'includes/footer.php'; ?>
