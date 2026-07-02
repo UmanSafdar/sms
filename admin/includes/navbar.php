@@ -6,7 +6,7 @@
     <title>School Management System</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm ">
     <div class="container-fluid">
 
         <span class="navbar-brand" style="text-align: center">
