@@ -9,17 +9,19 @@
 <body>
 
 <div class="container-fluid">
+     <?php include 'includes/navbar.php'; ?>
     <div class="row">
 
         <?php include 'includes/sidebar.php'; ?>
+        
 
         <div class="col-md-9 col-lg-10">
 
-            <?php include 'includes/navbar.php'; ?>
+           
 
             <div class="container">
 
-                <h2>Students</h2>
+                <h2 class="mb-4">Students</h2>
 
                 <div class="card">
                     <div class="card-body">

@@ -1,110 +1,266 @@
 <?php
 include '../db_connect.php';
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+/* ===========================
+   UPDATE CLASS
+=========================== */
+if (isset($_POST['update_class'])) {
+
+    $class_id = $_POST['class_id'];
+    $class_name = trim($_POST['class_name']);
+    $class_description = trim($_POST['description']);
+
+    if (empty($class_name) || empty($class_description)) {
+
+        echo "<div class='alert alert-danger'>Please fill all fields.</div>";
+
+    } else {
+
+        $update_query = "UPDATE classes
+                         SET class_name='$class_name',
+                             description='$class_description'
+                         WHERE class_id='$class_id'";
+
+        $result = mysqli_query($conn, $update_query);
+
+        if ($result) {
+            header("Location: classes.php?updated=1");
+            exit();
+        } else {
+            echo mysqli_error($conn);
+        }
+    }
+}
+
+
+/* ===========================
+   LOAD DATA FOR EDIT
+=========================== */
+$edit_data = [];
+
+if (isset($_GET['edit'])) {
+
+    $id = $_GET['edit'];
+
+    $qry = "SELECT * FROM classes WHERE class_id='$id'";
+    $res = mysqli_query($conn, $qry);
+
+    $edit_data = mysqli_fetch_assoc($res);
+}
+
+
+/* ===========================
+   ADD CLASS
+=========================== */
+if (isset($_POST['add_class'])) {
 
     $class_name = trim($_POST['class_name']);
     $description = trim($_POST['description']);
 
-    $q = "INSERT INTO classes (class_name, description)
-          VALUES ('$class_name', '$description')";
+    if (empty($class_name) || empty($description)) {
 
-    $r = mysqli_query($conn, $q);
+        echo "<div class='alert alert-danger'>Please fill all fields.</div>";
 
-   if ($r) {
-    header("Location: classes.php?success=1");
-    exit();
-} else {
-        echo "<div class='alert alert-danger text-center'>Something went wrong!</div>";
+    } else {
+
+        $q = "INSERT INTO classes(class_name,description)
+              VALUES('$class_name','$description')";
+
+        $r = mysqli_query($conn, $q);
+
+        if ($r) {
+            header("Location: classes.php?success=1");
+            exit();
+        } else {
+            echo mysqli_error($conn);
+        }
     }
+}
+
+
+/* ===========================
+   DISPLAY ALL CLASSES
+=========================== */
+
+$query = "SELECT * FROM classes";
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die(mysqli_error($conn));
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Classes Management</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>Classes Management</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
+
 <body>
 
-<?php
-include 'includes/navbar.php';
-if (isset($_GET['success'])) {
-    echo "<div class='alert alert-success'>Class Added Successfully!</div>";
-}
-?>
-
+<?php include 'includes/navbar.php'; ?>
 
 <div class="container-fluid">
 
-    <div class="row">
+<div class="row">
 
-        <?php include 'includes/sidebar.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
 
-        <div class="col-md-9 col-lg-10 p-4">
+<div class="col-md-9 col-lg-10 p-4">
 
-            <h2 class="mb-1">Classes Management</h2>
-            <p class="text-muted mb-4">
-                Add and manage all classes in the system.
-            </p>
+<?php
 
-            <div class="card shadow">
+if(isset($_GET['success'])){
+    echo "<div class='alert alert-success'>Class Added Successfully.</div>";
+}
 
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Add New Class</h5>
-                </div>
+if(isset($_GET['updated'])){
+    echo "<div class='alert alert-success'>Class Updated Successfully.</div>";
+}
 
-                <div class="card-body">
+?>
 
-                    <form action="" method="POST">
+<h2>Classes Management</h2>
 
-                        <div class="mb-3">
-                            <label class="form-label">Class Name</label>
+<p class="text-muted">
+Add and manage all classes in the system.
+</p>
 
-                            <input
-                                type="text"
-                                name="class_name"
-                                class="form-control"
-                                placeholder="Enter Class Name"
-                                required>
-                        </div>
+<div class="card shadow">
 
-                        <div class="mb-3">
-                            <label class="form-label">Description</label>
+<div class="card-header bg-primary text-white">
+<h5 class="mb-0">
+<?php echo isset($_GET['edit']) ? "Update Class" : "Add New Class"; ?>
+</h5>
+</div>
 
-                            <textarea
-                                name="description"
-                                class="form-control"
-                                rows="4"
-                                placeholder="Enter Description"
-                                required></textarea>
-                        </div>
+<div class="card-body">
 
-                        <button type="submit" class="btn btn-primary">
-                            Add Class
-                        </button>
+<form method="POST">
 
-                    </form>
+<input
+type="hidden"
+name="class_id"
+value="<?php echo $edit_data['class_id'] ?? ''; ?>">
 
-                </div>
+<div class="mb-3">
 
-            </div>
+<label class="form-label">
+Class Name
+</label>
 
-        </div>
-
-    </div>
+<input
+type="text"
+name="class_name"
+class="form-control"
+placeholder="Enter Class Name"
+required
+value="<?php echo $edit_data['class_name'] ?? ''; ?>">
 
 </div>
-        </div> <!-- End Content Column -->
 
-    </div> <!-- End Row -->
+<div class="mb-3">
 
-</div> <!-- End Container -->
+<label class="form-label">
+Description
+</label>
+
+<textarea
+name="description"
+class="form-control"
+rows="4"
+placeholder="Enter Description"
+required><?php echo $edit_data['description'] ?? ''; ?></textarea>
+
+</div>
+
+<button
+type="submit"
+class="btn btn-primary"
+name="<?php echo isset($_GET['edit']) ? 'update_class' : 'add_class'; ?>">
+
+<?php echo isset($_GET['edit']) ? 'Update Class' : 'Add Class'; ?>
+
+</button>
+
+</form>
+
+<hr>
+
+<div class="card-header bg-primary text-white">
+<h5 class="text-center">
+Classes
+</h5>
+</div>
+
+<table class="table table-bordered table-striped text-center mt-3">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Class</th>
+<th>Description</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<?php while($row=mysqli_fetch_assoc($result)){ ?>
+
+<tr>
+
+<td><?php echo $row['class_id']; ?></td>
+
+<td><?php echo $row['class_name']; ?></td>
+
+<td><?php echo $row['description']; ?></td>
+
+<td>
+
+<a
+href="classes.php?edit=<?php echo $row['class_id']; ?>"
+class="btn btn-warning btn-sm">
+Edit
+</a>
+
+<a
+href="classes.php?delete=<?php echo $row['class_id']; ?>"
+class="btn btn-danger btn-sm">
+Delete
+</a>
+
+</td>
+
+</tr>
+
+<?php } ?>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
