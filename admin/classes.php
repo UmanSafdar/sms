@@ -77,6 +77,19 @@ if (isset($_POST['add_class'])) {
     }
 }
 
+        /* ===========================
+        DELETE CLASS
+        =========================== */
+if(isset($_GET['delete'])){
+    $delete_id = $_GET['delete'];
+    $delete_query = "DELETE FROM classes WHERE class_id ='$delete_id'";
+    $delete_result = mysqli_query($conn, $delete_query);
+    if($delete_result){
+        
+        header("Location: classes.php?deleted=1");
+        exit();
+    } 
+}
 
 /* ===========================
    DISPLAY ALL CLASSES
@@ -89,6 +102,7 @@ if (!$result) {
     die(mysqli_error($conn));
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -125,6 +139,9 @@ if(isset($_GET['success'])){
 if(isset($_GET['updated'])){
     echo "<div class='alert alert-success'>Class Updated Successfully.</div>";
 }
+ if(isset($_GET['deleted'])){
+        echo "<div class='alert alert-success'>Class Deleted Successfully.</div>";
+    }
 
 ?>
 
@@ -238,7 +255,8 @@ Edit
 
 <a
 href="classes.php?delete=<?php echo $row['class_id']; ?>"
-class="btn btn-danger btn-sm">
+class="btn btn-danger btn-sm"
+onclick= "return confirm('Are Your Sure to Delete ?');">
 Delete
 </a>
 
