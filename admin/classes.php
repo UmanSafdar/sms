@@ -12,7 +12,7 @@ if (isset($_POST['update_class'])) {
 
     if (empty($class_name) || empty($class_description)) {
 
-        echo "<div class='alert alert-danger'>Please fill all fields.</div>";
+        echo '<div class="alert alert-danger">Please fill all fields.</div>';
 
     } else {
 

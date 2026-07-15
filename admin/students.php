@@ -2,41 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Students</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Subjects</title>
 </head>
 <body>
-
-<div class="container-fluid">
-     <?php include 'includes/navbar.php'; ?>
-    <div class="row">
-
-        <?php include 'includes/sidebar.php'; ?>
-        
-
-        <div class="col-md-9 col-lg-10">
-
-           
-
-            <div class="container">
-
-                <h2 class="mb-4">Students</h2>
-
-                <div class="card">
-                    <div class="card-body">
-                        Student Management Page
-                    </div>
-                </div>
-
-            </div>
-
-            <?php include 'includes/footer.php'; ?>
-
-        </div>
-
+    <?php 
+    include 'includes/navbar.php'; ?>
+    <div>
+        <?php include 'includes/sidebar.php'?>
     </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
