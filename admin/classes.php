@@ -4,6 +4,7 @@ include '../db_connect.php';
 /* ===========================
    UPDATE CLASS
 =========================== */
+
 if (isset($_POST['update_class'])) {
 
     $class_id = $_POST['class_id'];
@@ -12,7 +13,7 @@ if (isset($_POST['update_class'])) {
 
     if (empty($class_name) || empty($class_description)) {
 
-        echo '<div class="alert alert-danger">Please fill all fields.</div>';
+        echo "<div class='alert alert-danger'>Please fill all fields.</div>";
 
     } else {
 
@@ -31,7 +32,6 @@ if (isset($_POST['update_class'])) {
         }
     }
 }
-
 
 /* ===========================
    LOAD DATA FOR EDIT
