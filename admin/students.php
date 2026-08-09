@@ -61,7 +61,7 @@ if (!$result) {
                             <td><?php echo $row['Email']; ?></td>
                             <td><?php echo ucfirst($row['status']); ?></td>
                             <td>
-                                <a href="students.php?complete=<?php echo $row['Id']; ?>"
+                                <a href="students_profile.php?id=<?php echo $row['Id']; ?>"
                                    class="btn btn-primary btn-sm">
                                     Complete Profile
                                 </a>
@@ -81,6 +81,6 @@ if (!$result) {
 
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
