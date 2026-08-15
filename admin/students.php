@@ -1,7 +1,13 @@
 <?php
 include '../db_connect.php';
 
-$query = "SELECT * FROM users WHERE Role='student' AND status='approved'";
+$query = "SELECT users.*, students.profile_status
+    FROM users
+    LEFT JOIN students ON users.Id = students.user_id
+    WHERE users.Role = 'student'
+    AND users.status = 'approved'
+    AND (students.profile_status IS NULL OR students.profile_status != 'complete')
+";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -21,18 +27,13 @@ if (!$result) {
 </head>
 
 <body>
-
-<?php include 'includes/navbar.php'; ?>
-
 <div class="container-fluid">
     <div class="row">
-
         <!-- Sidebar -->
         <?php include 'includes/sidebar.php'; ?>
-
         <!-- Main Content -->
         <div class="col-md-9 col-lg-10 p-4">
-
+        <?php include 'includes/navbar.php'; ?>
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">Approved Student Accounts</h4>

@@ -37,7 +37,7 @@
 
             <div class="container">
 
-                <h2 class="mb-4">Dashboard</h2>
+                <h3 class="mb-4">Dashboard</h3>
 
                 <div class="row g-3">
 

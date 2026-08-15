@@ -9,9 +9,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm ">
     <div class="container-fluid">
 
-        <span class="navbar-brand" style="text-align: center">
+        <h2 style="text-align: center">
             School Management System
-        </span>
+</h2>
 
         <div class="ms-auto">
             <span class="badge bg-primary">

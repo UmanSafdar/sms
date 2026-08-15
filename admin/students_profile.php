@@ -17,6 +17,47 @@ $result = mysqli_query($conn,$student_select);
 
 if($result){
 if(mysqli_num_rows($result) > 0){
+
+
+?>
+<?php
+        if($_SERVER['REQUEST_METHOD']== "POST"){
+            if(isset($_GET['id'])){
+              $id = $_GET['id'];
+                        }
+            $Full_Name = $_POST['full_name'];
+            $Father_Name = $_POST['father_name'];
+            $Roll_No = $_POST['roll_no'];
+            $Gender = $_POST['gender'];
+            $DOB = $_POST['dob'];
+            $Phone_No = $_POST['phone'];
+            $Address = $_POST['address'];
+            $Class_id = $_POST['class_id'];
+            $Admission_Date = $_POST['admission_date'];
+            $check = "SELECT student_id FROM students where user_id = $id";
+            $check_query = mysqli_query($conn, $check);
+
+            if($row=mysqli_fetch_assoc($check_query)> 0){
+                echo "Record already exist";
+            }
+            else{
+
+            
+        $profile_query = "INSERT INTO students (user_id,full_name, father_name, roll_no, gender, dob, phone, address, class_id, admission_date)
+                            VALUES($id,'$Full_Name', '$Father_Name', '$Roll_No', '$Gender', '$DOB', '$Phone_No', '$Address',$Class_id, '$Admission_Date')";
+        $presult = mysqli_query($conn, $profile_query);
+        if($presult){
+            $update = "UPDATE students SET profile_status = 'complete'
+            WHERE user_id = $id";
+            mysqli_query($conn, $update);
+            echo "Data stroe to database Successfully";
+
+            
+        }
+        
+
+        }
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -218,9 +259,19 @@ if(mysqli_num_rows($result) > 0){
                                     name="class_id"
                                 >
                                     <option value="">Select Class</option>
+                         <!-- Classes from database -->
+                            <?php
+                                    $query = "SELECT class_id, class_name FROM classes";
+                                    $class_query_result = mysqli_query($conn, $query);
+                                    while($row=mysqli_fetch_assoc($class_query_result)){
 
-                                    <!-- Classes from database -->
-
+                            ?>
+                            <option value="<?php echo $row['class_id']; ?>">
+                                <?php echo $row['class_name']; ?>
+                            </option>
+                            <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
 

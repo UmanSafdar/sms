@@ -111,9 +111,6 @@ if (isset($_POST['add_subject'])) {
 </head>
 
 <body>
-
-<?php include 'includes/navbar.php'; ?>
-
 <div class="container-fluid">
     <div class="row">
 
@@ -122,7 +119,7 @@ if (isset($_POST['add_subject'])) {
 
         <!-- Main Content -->
         <div class="col-md-9 col-lg-10 p-4">
-
+        <?php include 'includes/navbar.php'; ?>
             <!-- Add Subject Card -->
             <div class="card shadow mb-4">
                 <?php if(isset($_GET['updated'])){
