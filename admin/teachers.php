@@ -1,8 +1,13 @@
 <?php
 include '../db_connect.php';
 
-$query = "SELECT * FROM users
-          WHERE Role = 'teacher' AND status = 'approved'";
+$query = "SELECT users.*, teachers.profile_status
+          FROM users
+          LEFT JOIN teachers ON users.Id = teachers.user_id
+          WHERE users.Role = 'teacher'
+          AND users.status = 'approved'
+          AND (teachers.profile_status IS NULL 
+               OR teachers.profile_status != 'complete')";
 $result = mysqli_query($conn, $query);
 if (!$result) {
     die("Query Failed: " . mysqli_error($conn));

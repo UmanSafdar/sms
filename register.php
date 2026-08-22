@@ -29,7 +29,7 @@
     
     if($r){
         echo "Account Created Sussfully";
-        // header("location: login.php");
+        header("location: login.php");
         exit();
     }
     else{
