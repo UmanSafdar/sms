@@ -12,7 +12,15 @@ $result = mysqli_query($conn, $query);
 
 if (!$result) {
     die("Query Failed: " . mysqli_error($conn));
+
+
 }
+$student_list ="SELECT students.* ,classes.class_name
+FROM students
+LEFT JOIN classes ON students.class_id = classes.class_id
+ WHERE students.profile_status = 'complete'";
+$result_list = mysqli_query($conn, $student_list);
+
 ?>
 
 <!DOCTYPE html>
@@ -76,12 +84,72 @@ if (!$result) {
                     </table>
 
                 </div>
+                
             </div>
+            <br> 
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Students List</h4>
+                </div>
 
+                <div class="card-body">
+
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-info">
+                            <tr>
+                                <th>ADMISSION DATE</th>
+                                <th>ROLL NO</th>
+                                <th>STUDENT ID</th>
+                                <th>STUDENT NAME</th>
+                                <th>FATHER NAME</th>
+                                <th>CLASS</th>
+                                <th>ADDRESS</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <?php
+                        while($row = mysqli_fetch_assoc($result_list)){
+                        ?>
+
+                        <tr>
+                            <td><?php echo $row['admission_date']; ?></td>
+                            <td><?php echo $row['roll_no']; ?></td>
+                            <td><?php echo $row['student_id']; ?></td>
+                            <td><?php echo $row['full_name']; ?></td>
+                            <td><?php echo $row['father_name']; ?></td>
+                            <td><?php echo $row['class_name']; ?></td>
+                            <td><?php echo $row['address']; ?></td>
+                            
+                            <td>
+                                <a href="edit_student.php?id=<?php echo $row['user_id'];?>"
+                                   class="btn btn-dark btn-sm">
+                                    Edit
+                                </a>
+                                <a href="#"
+                                   class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+
+                        <?php } ?>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+                
+            </div>
+            
         </div>
 
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

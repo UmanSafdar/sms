@@ -13,6 +13,12 @@ if (!$result) {
     die("Query Failed: " . mysqli_error($conn));
 }
 
+$teacher_query = "SELECT * FROM teachers WHERE profile_status ='complete'";
+$teacher_result = mysqli_query($conn, $teacher_query);
+if($teacher_query){
+    echo "Success query";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,8 +82,63 @@ if (!$result) {
                     </table>
 
                 </div>
+                
+                 
             </div>
+            <br>
+<div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Teacher List</h4>
+                </div>
 
+                <div class="card-body">
+
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Teacher Name</th>
+                                <th>Qualification</th>
+                                <th>Joining Date</th>
+                                <th>Salary</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        <?php
+                        if(mysqli_num_rows($teacher_result) > 0){
+                        while($row = mysqli_fetch_assoc($teacher_result)){
+                        ?>
+
+                        <tr>
+                            <td><?php echo $row['teacher_id']; ?></td>
+                            <td><?php echo $row['full_name']; ?></td>
+                            <td><?php echo $row['qualification'];?></td>
+                            <td><?php echo $row['joining_date'];?></td>
+                            <td><?php echo $row['salary'];?></td>
+                            <td>
+                                <a href="teachers.php?edit=<?php echo $row['teacher_id'];?>"
+                                   class="btn btn-dark btn-sm">
+                                    Edit
+                                </a>
+                                <a href="teachers.php?delete=<?php echo $row['teacher_id'];?>"
+                                   class="btn btn-primary btn-sm"
+                                   onclick="return confirm('Are you sure to delete ?')";>
+
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+
+                        <?php } }?>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
         </div>
 
     </div>

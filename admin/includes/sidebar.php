@@ -32,11 +32,6 @@
             Subjects
         </a>
 
-        <a href="attendance.php"
-           class="list-group-item list-group-item-action bg-dark text-white">
-            Attendance
-        </a>
-
         <a href="fees.php"
            class="list-group-item list-group-item-action bg-dark text-white">
             Fees

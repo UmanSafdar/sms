@@ -245,7 +245,7 @@ Edit
 <a
 href="classes.php?delete=<?php echo $row['class_id']; ?>"
 class="btn btn-danger btn-sm"
-onclick= "return confirm('Are Your Sure to Delete ?');">
+onclick= "return confirm('Are You Sure to Delete ?');">
 Delete
 </a>
 
