@@ -82,7 +82,7 @@ if (isset($_POST['add_class'])) {
         =========================== */
 if(isset($_GET['delete'])){
     $delete_id = $_GET['delete'];
-    $delete_query = "DELETE FROM classes WHERE class_id ='$delete_id'";
+    $delete_query = "UPDATE classes SET status = 'disable' WHERE class_id ='$delete_id'";
     $delete_result = mysqli_query($conn, $delete_query);
     if($delete_result){
         
@@ -95,7 +95,7 @@ if(isset($_GET['delete'])){
    DISPLAY ALL CLASSES
 =========================== */
 
-$query = "SELECT * FROM classes";
+$query = "SELECT * FROM classes WHERE status = 'active'";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {

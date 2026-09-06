@@ -1,6 +1,7 @@
 <?php
 include '../db_connect.php';
 
+
 $query = "SELECT users.*, students.profile_status
     FROM users
     LEFT JOIN students ON users.Id = students.user_id
@@ -15,12 +16,24 @@ if (!$result) {
 
 
 }
+/*==================
+         =========== DELETE =========*/   
+            if(isset($_GET['id'])){
+    $delete_id = $_GET['id'];
+    $delete_query = "UPDATE students SET student_status = 'disable' WHERE student_id ='$delete_id'";
+    $delete_result = mysqli_query($conn, $delete_query);
+    if(!$delete_result){
+        
+        echo "Error".mysqli_error();
+    }}
 $student_list ="SELECT students.* ,classes.class_name
 FROM students
 LEFT JOIN classes ON students.class_id = classes.class_id
- WHERE students.profile_status = 'complete'";
+ WHERE students.profile_status = 'complete' AND students.student_status = 'active'";
 $result_list = mysqli_query($conn, $student_list);
 
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -128,8 +141,9 @@ $result_list = mysqli_query($conn, $student_list);
                                    class="btn btn-dark btn-sm">
                                     Edit
                                 </a>
-                                <a href="#"
-                                   class="btn btn-danger btn-sm">
+                                <a href="students.php?id=<?php echo $row['student_id'];?>"
+                                   class="btn btn-danger btn-sm"
+                                    onclick="return confirm('are you sure to delete!');">
                                     Delete
                                 </a>
                             </td>

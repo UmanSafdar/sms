@@ -12,11 +12,22 @@ $result = mysqli_query($conn, $query);
 if (!$result) {
     die("Query Failed: " . mysqli_error($conn));
 }
-
-$teacher_query = "SELECT * FROM teachers WHERE profile_status ='complete'";
+/* ===========================
+        DELETE CLASS
+        =========================== */
+if(isset($_GET['delete'])){
+    $delete_id = $_GET['delete'];
+    $delete_query = "UPDATE teachers SET status = 'disable' WHERE teacher_id ='$delete_id'";
+    $delete_result = mysqli_query($conn, $delete_query);
+    if($delete_result){
+        
+        header("Location: teachers.php?deleted=1");
+        exit();
+    } }
+$teacher_query = "SELECT * FROM teachers WHERE profile_status ='complete' AND status = 'active'";
 $teacher_result = mysqli_query($conn, $teacher_query);
-if($teacher_query){
-    echo "Success query";
+if(!$teacher_query){
+    echo "Error";
 }
 
 ?>
@@ -119,7 +130,7 @@ if($teacher_query){
                             <td><?php echo $row['joining_date'];?></td>
                             <td><?php echo $row['salary'];?></td>
                             <td>
-                                <a href="teachers.php?edit=<?php echo $row['teacher_id'];?>"
+                                <a href="edit_teacher.php?edit=<?php echo $row['teacher_id'];?>"
                                    class="btn btn-dark btn-sm">
                                     Edit
                                 </a>

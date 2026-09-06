@@ -45,7 +45,7 @@ if(isset($_POST['student_update'])){
    else{ 
         echo "Error: " . mysqli_error($conn); 
     }
-}
+      }
 ?>
 <!DOCTYPE html>
 <html lang="en">
