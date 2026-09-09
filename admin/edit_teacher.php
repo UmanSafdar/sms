@@ -32,31 +32,10 @@ if(isset($_POST['update_teacher'])){
     }
 else{
     echo "error";
+}     
 }
-      
 }
-
-}
-
-    //     /* =========== DELETE =========*/   
-    //         if(isset($_GET['id'])){
-    // $delete_id = $_GET['id'];
-    // $delete_query = "UPDATE students SET student_status = 'disable' WHERE student_id ='$delete_id'";
-    // $delete_result = mysqli_query($conn, $delete_query);
-    // if(!$delete_result){
-        
-    //     echo "Error".mysqli_error();
-    // }}
-// $student_list ="SELECT students.* ,classes.class_name
-// FROM students
-// LEFT JOIN classes ON students.class_id = classes.class_id
-//  WHERE students.profile_status = 'complete' AND students.student_status = 'active'";
-// $result_list = mysqli_query($conn, $student_list);
-
-
-    
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +46,6 @@ else{
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-
     <div class="container-fluid">
     <div class="row">
 

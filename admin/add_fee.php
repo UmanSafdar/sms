@@ -8,16 +8,27 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $fee_amount = trim($_POST['fee_amount']);
     $status = trim($_POST['status']);
     $fee_month = trim($_POST['fee_month']);
-
+    $check_query = "SELECT * FROM fees
+                    WHERE student_id = '$student_id'
+                    AND fee_month = '$fee_month'";
+                       $check_result = mysqli_query($conn, $check_query);
+    if((mysqli_num_rows($check_result)>0)){
+        echo "Fee already Generated.";
+    }
+else{
     $fee_query= "INSERT INTO fees (student_id, fee_month, amount,status)
     VALUES('$student_id', '$fee_month', '$fee_amount','$status')";
     $fee_result = mysqli_query($conn, $fee_query);
-    if($fee_result){
-        echo "Success";
-    }
+     
+    
 
+if($fee_result){
+            echo "Fee Saved Successfully";
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
 }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>Document</title>
+    <title>Edit Fees</title>
 </head>
 <body>
     <?php
@@ -106,7 +117,7 @@ include 'includes/navbar.php';
                 </div>
 
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit"class="btn btn-primary">
                             Save Fee
                         </button>
 

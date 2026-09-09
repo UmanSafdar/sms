@@ -2,20 +2,12 @@
 include '../db_connect.php';
 
 
-$query = "SELECT users.*, students.profile_status
-    FROM users
-    LEFT JOIN students ON users.Id = students.user_id
-    WHERE users.Role = 'student'
-    AND users.status = 'approved'
-    AND (students.profile_status IS NULL OR students.profile_status != 'complete')
-";
-$result = mysqli_query($conn, $query);
-
-if (!$result) {
-    die("Query Failed: " . mysqli_error($conn));
-
-
-}
+ $Full_Name = $_POST['full_name'];
+            $Qualification = $_POST['qualification'];
+            $Specialization = $_POST['specialization'];
+            $Phone_No = $_POST['phone'];
+            $Salary = $_POST['salary'];
+            $Joining_date = $_POST['joining_date'];
 /*==================
          =========== DELETE =========*/   
             if(isset($_GET['id'])){

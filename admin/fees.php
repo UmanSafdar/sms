@@ -60,7 +60,7 @@ $result = mysqli_query($conn, $query);
                         <table class="table table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>#</th>
+                                    <th>S.No</th>
                                     <th>Student</th>
                                     <th>Class</th>
                                     <th>Month</th>
@@ -98,7 +98,7 @@ $result = mysqli_query($conn, $query);
 
                             <?php } ?>
                             <td>
-                                <a href="fees.php?edit=<?php echo $row[fee_id];?>"
+                                <a href="edit_fee.php?edit=<?php echo $row['fee_id'];?>"
                             class="btn btn-danger btn-sm"
                             >Edit</td>
                             
