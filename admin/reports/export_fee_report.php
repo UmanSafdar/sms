@@ -10,6 +10,7 @@ $status = $_GET['status'] ?? '';
 $query = "SELECT
             students.full_name,
             students.roll_no,
+            classes.class_name,
             fees.fee_month,
             fees.amount,
             fees.payment_date,
@@ -194,4 +195,3 @@ echo "</table>";
 
 ?>
 
-?>
