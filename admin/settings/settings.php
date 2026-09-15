@@ -2,6 +2,23 @@
 
 include '../../db_connect.php';
 
+if(isset($_POST['update_setting'])){
+    $School_Name = $_POST['school_name'];
+    $Address = $_POST['address'];
+    $Phone = $_POST['phone'];
+    $Email = $_POST['email'];
+    $Admin_Name = $_POST['admin_name'];
+$update_query = "UPDATE settings SET
+            school_name = '$School_Name',
+            address = '$Address',
+            phone = '$Phone',
+            email = '$Email',
+            admin_name = '$Admin_Name'
+        WHERE setting_id = 1";
+mysqli_query($conn, $update_query);
+}
+
+//==========GET SETTING===============//
 $query = "SELECT * FROM settings WHERE setting_id = 1";
 $result = mysqli_query($conn, $query);
 $setting = mysqli_fetch_assoc($result);
@@ -37,7 +54,7 @@ $setting = mysqli_fetch_assoc($result);
                      <input type="text"
                      name="school_name"
                      class="form-control"
-                     value="<?php htmlspecialchars($setting['school_name']);?>">
+                     value="<?php echo htmlspecialchars($setting['school_name']);?>">
                      </div>
                      <!-- ADDRESS  -->
                      <div class="mb-3">
@@ -45,7 +62,7 @@ $setting = mysqli_fetch_assoc($result);
                      <input type="text"
                      name="address"
                      class="form-control"
-                     value="<?php htmlspecialchars($setting['address']);?>">
+                     value="<?php echo htmlspecialchars($setting['address']);?>">
                      </div>
                      <!-- PHONE  -->
                      <div class="mb-3">
@@ -53,15 +70,7 @@ $setting = mysqli_fetch_assoc($result);
                      <input type="text"
                      name="phone"
                      class="form-control"
-                     value="<?php htmlspecialchars($setting['phone']);?>">
-                     </div>
-                     <!-- SCHOOL NAME  -->
-                     <div class="mb-3">
-                     <label class="form-label"> School Name </label>
-                     <input type="text"
-                     name="school_name"
-                     class="form-control"
-                     value="<?php htmlspecialchars($setting['school_name']);?>">
+                     value="<?php echo htmlspecialchars($setting['phone']);?>">
                      </div>
                      <!-- EMAIL  -->
                      <div class="mb-3">
@@ -69,15 +78,7 @@ $setting = mysqli_fetch_assoc($result);
                      <input type="text"
                      name="email"
                      class="form-control"
-                     value="<?php htmlspecialchars($setting['email']);?>">
-                     </div>
-                     <!-- SCHOOL NAME  -->
-                     <div class="mb-3">
-                     <label class="form-label"> School Name </label>
-                     <input type="text"
-                     name="school_name"
-                     class="form-control"
-                     value="<?php htmlspecialchars($setting['school_name']);?>">
+                     value="<?php echo htmlspecialchars($setting['email']);?>">
                      </div>
                      <!-- ADMIN NAME  -->
                      <div class="mb-3">
@@ -85,9 +86,9 @@ $setting = mysqli_fetch_assoc($result);
                      <input type="text"
                      name="admin_name"
                      class="form-control"
-                     value="<?php htmlspecialchars($setting['admin_name']);?>">
+                     value="<?php echo htmlspecialchars($setting['admin_name']);?>">
                      </div>
-                     <button class="btn btn-primary" type="submit">Update Settings</button>
+                     <button class="btn btn-primary" type="submit" name="update_setting">Update Settings</button>
                 </form>
             </div>
         </div>
