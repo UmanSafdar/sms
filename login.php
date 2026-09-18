@@ -36,12 +36,13 @@
         
         $_SESSION['email'] = $row['Email'];
         $_SESSION['role'] = $row['Role'];
+        $_SESSION['user_id'] = $row['Id'];
         if($row['Role']== "admin"){
             header("Location: admin/Admin_dashboard.php");
         exit();
         }
          if($row['Role']== "teacher"){
-            header("Location: admin/Teacher_dashboard.php");
+            header("Location: teacher/teacher_dashboard.php");
         exit();
         }
          if($row['Role']== "student"){

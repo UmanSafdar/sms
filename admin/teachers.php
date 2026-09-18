@@ -1,4 +1,5 @@
 <?php
+include 'includes/auth.php';
 include '../db_connect.php';
 
 $query = "SELECT users.*, teachers.profile_status
@@ -48,9 +49,9 @@ if(!$teacher_query){
         <!-- Sidebar -->
         <?php include 'includes/sidebar.php'; ?>
         <!-- Main Content -->
-        <div class="col-md-9 col-lg-10 p-4">
+        <div class="col-md-9 col-lg-10 p-4 offset-md-3 offset-lg-2 mt-5">
         <?php include 'includes/navbar.php'; ?>
-            <div class="card shadow">
+            <div class="card shadow pt-5">
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">Approved Teacher Accounts</h4>
                 </div>

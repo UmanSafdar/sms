@@ -23,22 +23,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body >
 <div class="container-fluid">
+    <?php include 'includes/navbar.php'; ?>
     <div class="row">
         <?php include 'includes/sidebar.php'; ?>
+        <div class="col-md-9 col-lg-10 p-4 mt-0 offset-md-3 offset-lg-2 mt-5">
+ <div class="container ">
 
-        <div class="col-md-9 col-lg-10">
-
-            <?php include 'includes/navbar.php'; ?>
-
-            <div class="container">
-
-                <h3 class="mb-4">Dashboard</h3>
-
+<div class="d-flex justify-content-between align-items-center my-4 bg-dark text-white rounded text-center mx-auto">
+                <h2 class="mb-4 text-center">Dashboard</h2>
+</div>
                 <div class="row g-3">
 
                     <div class="col-md-3">
@@ -60,7 +57,7 @@
                     </div>
 
                     <div class="col-md-3">
-                        <div class="card text-bg-warning">
+                        <div class="card text-bg-dark">
                             <div class="card-body">
                                 <h3>10</h3>
                                 <p>Total Classes</p>
@@ -128,7 +125,7 @@
             <td><?php echo $row['Email']; ?></td>
             <td><?php echo $row['Role']; ?></td>
             <td>
-                <a href="Admin_dashboard.php?approve_id=<?php echo $row['Id']; ?>" class="btn btn-success btn-sm">
+                <a href="Admin_dashboard.php?approve_id=<?php echo $row['Id']; ?>" class="btn btn-dark btn-sm">
                     Approve User
                 </a>
             </td>

@@ -1,5 +1,5 @@
 <?php
-
+include '../includes/auth.php';
 include '../../db_connect.php';
 
 if(isset($_POST['update_setting'])){
@@ -34,17 +34,22 @@ $setting = mysqli_fetch_assoc($result);
 
     <title>Settings</title>
 </head>
-<body>
+<body style="background-color: #fcfffd">
     <div class="container-fluid">
-    <?php include '../includes/navbar.php'; ?>
+    
         <div class="row">
+            
          <?php include '../includes/sidebar.php'?>
+         
          <!-- //============MAIN CONTENT ============// -->
-     <div class="col-md-9 col-lg-10 p-4">
-        <h2 class="mb-4 bg-primary text-white text-center mx-auto">Settings</h2>
+         
+     <div class="col-md-9 col-lg-10 offset-md-3 offset-lg-2 mt-5 pt-5">
+        <?php include '../includes/navbar.php'; ?>
+        
+        <h2 class="mb-4 bg-dark text-white text-center mx-auto rounded">Settings</h2>
         <div class="card-shadow sm">
             <div class="card-header">
-                <h5 class="mb-0">School Information</h5>
+                <h5 class="mb-0 text-center">School Information</h5>
             </div>
             <div class="card-body">
                 <form method="POST">

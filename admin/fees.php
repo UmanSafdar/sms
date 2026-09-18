@@ -1,4 +1,5 @@
 <?php
+include 'includes/auth.php';
 include '../db_connect.php';
 
 
@@ -32,20 +33,22 @@ $result = mysqli_query($conn, $query);
     <title>Fees</title>
 </head>
 <body>
-      <?php include 'includes/navbar.php'; ?>
+      
 
     <div class="container-fluid">
+       
         <div class="row">
-
+            
             <?php include 'includes/sidebar.php'; ?>
+            <br>
 
-            <div class="col-md-9 col-lg-10">
+            <div class="col-md-9 col-lg-10 p-4 offset-md-3 offset-lg-2 mt-5" >
+             <?php include 'includes/navbar.php'; ?>
+                <div class="d-flex justify-content-between align-items-center mb-4 p-2 bg-dark text-white mt-5 rounded">
 
-                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="text-center" >Fee Management</h2>
 
-                    <h2>Fee Management</h2>
-
-                    <a href="add_fee.php" class="btn btn-primary">
+                    <a href="add_fee.php mx-auto" class="btn btn-primary">
                         Add Fee
                     </a>
 

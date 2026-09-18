@@ -1,31 +1,59 @@
 <?php
+include 'includes/auth.php';
 include '../db_connect.php';
 
 
- $Full_Name = $_POST['full_name'];
-            $Qualification = $_POST['qualification'];
-            $Specialization = $_POST['specialization'];
-            $Phone_No = $_POST['phone'];
-            $Salary = $_POST['salary'];
-            $Joining_date = $_POST['joining_date'];
-/*==================
-         =========== DELETE =========*/   
-            if(isset($_GET['id'])){
+/* =========================
+   DELETE / DISABLE STUDENT
+   ========================= */
+
+if(isset($_GET['id'])){
+
     $delete_id = $_GET['id'];
-    $delete_query = "UPDATE students SET student_status = 'disable' WHERE student_id ='$delete_id'";
+
+    $delete_query = "UPDATE students 
+                     SET student_status = 'disable' 
+                     WHERE student_id = '$delete_id'";
+
     $delete_result = mysqli_query($conn, $delete_query);
+
     if(!$delete_result){
-        
-        echo "Error".mysqli_error();
-    }}
-$student_list ="SELECT students.* ,classes.class_name
-FROM students
-LEFT JOIN classes ON students.class_id = classes.class_id
- WHERE students.profile_status = 'complete' AND students.student_status = 'active'";
+
+        echo "Error: " . mysqli_error($conn);
+
+    }
+}
+
+
+/* =========================
+   APPROVED STUDENT ACCOUNTS
+   ========================= */
+
+$approved_students = "SELECT users.*
+                      FROM users
+                      LEFT JOIN students 
+                      ON users.Id = students.user_id
+                      WHERE users.Role = 'student'
+                      AND users.status = 'approved'
+                      AND (students.profile_status IS NULL 
+                      OR students.profile_status != 'complete')";
+
+$result = mysqli_query($conn, $approved_students);
+
+
+/* =========================
+   COMPLETED STUDENTS LIST
+   ========================= */
+
+$student_list = "SELECT students.*, classes.class_name
+                 FROM students
+                 LEFT JOIN classes 
+                 ON students.class_id = classes.class_id
+                 WHERE students.profile_status = 'complete'
+                 AND students.student_status = 'active'";
+
 $result_list = mysqli_query($conn, $student_list);
 
-
-    
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +73,10 @@ $result_list = mysqli_query($conn, $student_list);
         <!-- Sidebar -->
         <?php include 'includes/sidebar.php'; ?>
         <!-- Main Content -->
-        <div class="col-md-9 col-lg-10 p-4">
+        <div class="col-md-9 col-lg-10 p-4 offset-md-3 offset-lg-2 mt-5">
         <?php include 'includes/navbar.php'; ?>
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
+            <div class="card shadow pt-5">
+                <div class="card-header bg-primary text-white ">
                     <h4 class="mb-0">Approved Student Accounts</h4>
                 </div>
 
@@ -73,7 +101,7 @@ $result_list = mysqli_query($conn, $student_list);
                         <tr>
                             <td><?php echo $row['Id']; ?></td>
                             <td><?php echo $row['Email']; ?></td>
-                            <td><?php echo ucfirst($row['status']); ?></td>
+                            <td><?php echo $row['status']; ?></td>
                             <td>
                                 <a href="students_profile.php?id=<?php echo $row['Id']; ?>"
                                    class="btn btn-primary btn-sm">

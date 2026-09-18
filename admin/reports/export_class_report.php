@@ -32,7 +32,8 @@ $result = mysqli_query($conn, $query);
 
 // ==========Report==============
 ?>
-<table border="1">
+<div class="pt-5">
+<table border="1 ">
     <tr>
         <th colspan="3">Class Report</th>
     </tr>
@@ -54,3 +55,4 @@ $result = mysqli_query($conn, $query);
     <?php
    }        ?>
    </table>
+   </div>

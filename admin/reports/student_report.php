@@ -2,16 +2,30 @@
 
 include '../../db_connect.php';
 
+
+
+// =========================
+// GET SELECTED CLASS ID
+// =========================
+
 $class_id = $_GET['class_id'] ?? '';
 
 
-// Get classes for dropdown
-$class_query = "SELECT * FROM classes ORDER BY class_name ASC";
+// =========================
+// GET CLASSES FOR DROPDOWN
+// =========================
+
+$class_query = "SELECT * 
+                FROM classes 
+                ORDER BY class_name ASC";
 
 $class_result = mysqli_query($conn, $class_query);
 
 
-// Student query
+// =========================
+// STUDENT QUERY
+// =========================
+
 $query = "SELECT 
             students.full_name,
             students.father_name,
@@ -28,7 +42,10 @@ $query = "SELECT
           WHERE students.profile_status = 'complete'";
 
 
-// Apply class filter
+// =========================
+// APPLY CLASS FILTER
+// =========================
+
 if ($class_id != '') {
 
     $class_id = mysqli_real_escape_string($conn, $class_id);
@@ -37,8 +54,16 @@ if ($class_id != '') {
 }
 
 
+// =========================
+// SORT STUDENTS
+// =========================
+
 $query .= " ORDER BY students.roll_no ASC";
 
+
+// =========================
+// EXECUTE QUERY
+// =========================
 
 $result = mysqli_query($conn, $query);
 
@@ -56,201 +81,411 @@ $result = mysqli_query($conn, $query);
 
     <title>Student Report</title>
 
+
+    <!-- =========================
+         BOOTSTRAP
+    ========================= -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
+
+    <!-- =========================
+         PRINT CSS
+    ========================= -->
+
+    <style>
+
+        @media print {
+
+            body * {
+                visibility: hidden;
+            }
+
+            #studentTable,
+            #studentTable * {
+                visibility: visible;
+            }
+
+            #studentTable {
+
+                position: absolute;
+
+                left: 0;
+
+                top: 0;
+
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div class="container mt-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-
-        <h2>Student Report</h2>
-
-        <div>
-
-            <a href="reports_dashboard.php"
-               class="btn btn-secondary">
-                Back
-            </a>
-
-            <button onclick="window.print()"
-                    class="btn btn-dark">
-                Print
-            </button>
-
-        </div>
-
-    </div>
+<!-- =========================
+     NAVBAR
+========================= -->
 
 
-    <!-- Filter -->
-
-    <div class="card shadow-sm mb-4">
-
-        <div class="card-body">
-
-            <form method="GET">
-
-                <div class="row align-items-end">
-
-                    <div class="col-md-6">
-
-                        <label class="form-label">
-                            Select Class
-                        </label>
-
-                        <select name="class_id"
-                                class="form-select">
-
-                            <option value="">
-                                All Classes
-                            </option>
-
-                            <?php while ($class = mysqli_fetch_assoc($class_result)) { ?>
-
-                                <option value="<?= $class['class_id']; ?>"
-                                    <?= ($class_id == $class['class_id']) ? 'selected' : ''; ?>>
-
-                                    <?= htmlspecialchars($class['class_name']); ?>
-
-                                </option>
-
-                            <?php } ?>
-
-                        </select>
-
-                    </div>
 
 
-                    <div class="col-md-3">
+<div class="container-fluid">
 
-                        <button type="submit"
-                                class="btn btn-primary">
+    <div class="row">
+<?php include '../includes/navbar.php'; ?>
 
-                            Generate Report
+        <!-- =========================
+             SIDEBAR
+        ========================= -->
+
+        <?php include '../includes/sidebar.php'; ?>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================= -->
+
+        <div class="col-md-9 col-lg-10 offset-md-2 mt-5">
+
+
+            <div class="container mt-5">
+
+
+                <!-- =========================
+                     PAGE HEADER
+                ========================= -->
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <h2>
+
+                        Student Report
+
+                    </h2>
+
+
+                    <div>
+
+
+                        <!-- BACK BUTTON -->
+
+                        <a href="reports_dashboard.php"
+                           class="btn btn-secondary">
+
+                            Back
+
+                        </a>
+
+
+                        <!-- EXPORT BUTTON -->
+
+                        <a href="export_student.php?class_id=<?= $class_id; ?>"
+                           class="btn btn-success">
+
+                            Export to Excel
+
+                        </a>
+
+
+                        <!-- PRINT BUTTON -->
+
+                        <button onclick="window.print()"
+                                class="btn btn-dark">
+
+                            Print
 
                         </button>
+
 
                     </div>
 
                 </div>
 
-            </form>
-
-        </div>
-
-    </div>
 
 
-    <!-- Report -->
+                <!-- =========================
+                     CLASS FILTER
+                ========================= -->
 
-    <div class="card shadow-sm">
+                <div class="card shadow-sm mb-4">
 
-        <div class="card-body">
+                    <div class="card-body">
 
-            <h4 class="mb-3">
-                Student List
-            </h4>
 
-            <div class="table-responsive">
+                        <form method="GET">
 
-                <table class="table table-bordered table-striped">
 
-                    <thead>
+                            <div class="row align-items-end">
 
-                    <tr>
 
-                        <th>#</th>
-                        <th>Roll No</th>
-                        <th>Student Name</th>
-                        <th>Father Name</th>
-                        <th>Class</th>
-                        <th>Gender</th>
-                        <th>Phone</th>
+                                <!-- CLASS DROPDOWN -->
 
-                    </tr>
+                                <div class="col-md-6">
 
-                    </thead>
+                                    <label class="form-label">
 
-                    <tbody>
+                                        Select Class
 
-                    <?php
+                                    </label>
 
-                    $counter = 1;
 
-                    if (mysqli_num_rows($result) > 0) {
+                                    <select name="class_id"
+                                            class="form-select">
 
-                        while ($student = mysqli_fetch_assoc($result)) {
 
-                    ?>
+                                        <option value="">
 
-                        <tr>
+                                            All Classes
 
-                            <td>
-                                <?= $counter++; ?>
-                            </td>
+                                        </option>
 
-                            <td>
-                                <?= htmlspecialchars($student['roll_no']); ?>
-                            </td>
 
-                            <td>
-                                <?= htmlspecialchars($student['full_name']); ?>
-                            </td>
+                                        <?php while ($class = mysqli_fetch_assoc($class_result)) { ?>
 
-                            <td>
-                                <?= htmlspecialchars($student['father_name']); ?>
-                            </td>
 
-                            <td>
-                                <?= htmlspecialchars($student['class_name'] ?? 'Not Assigned'); ?>
-                            </td>
+                                            <option value="<?= $class['class_id']; ?>"
+                                                <?= ($class_id == $class['class_id']) ? 'selected' : ''; ?>>
 
-                            <td>
-                                <?= htmlspecialchars($student['gender']); ?>
-                            </td>
+                                                <?= htmlspecialchars($class['class_name']); ?>
 
-                            <td>
-                                <?= htmlspecialchars($student['phone']); ?>
-                            </td>
+                                            </option>
 
-                        </tr>
 
-                    <?php
+                                        <?php } ?>
 
-                        }
 
-                    } else {
+                                    </select>
 
-                    ?>
+                                </div>
 
-                        <tr>
 
-                            <td colspan="7"
-                                class="text-center">
 
-                                No students found.
+                                <!-- GENERATE BUTTON -->
 
-                            </td>
+                                <div class="col-md-3">
 
-                        </tr>
+                                    <button type="submit"
+                                            class="btn btn-primary">
 
-                    <?php } ?>
+                                        Generate Report
 
-                    </tbody>
+                                    </button>
 
-                </table>
+                                </div>
+
+
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================
+                     STUDENT REPORT
+                ========================= -->
+
+                <div class="card shadow-sm">
+
+                    <div class="card-body">
+
+
+                        <h4 class="mb-3">
+
+                            Student List
+
+                        </h4>
+
+
+                        <div class="table-responsive">
+
+
+                            <table class="table table-bordered table-striped"
+                                   id="studentTable">
+
+
+                                <!-- =========================
+                                     TABLE HEADER
+                                ========================= -->
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>#</th>
+
+                                        <th>Roll No</th>
+
+                                        <th>Student Name</th>
+
+                                        <th>Father Name</th>
+
+                                        <th>Class</th>
+
+                                        <th>Gender</th>
+
+                                        <th>Phone</th>
+
+                                    </tr>
+
+                                </thead>
+
+
+
+                                <!-- =========================
+                                     TABLE BODY
+                                ========================= -->
+
+                                <tbody>
+
+
+                                    <?php
+
+                                    $counter = 1;
+
+
+                                    if (mysqli_num_rows($result) > 0) {
+
+
+                                        while ($student = mysqli_fetch_assoc($result)) {
+
+                                    ?>
+
+
+                                            <tr>
+
+
+                                                <td>
+
+                                                    <?= $counter++; ?>
+
+                                                </td>
+
+
+                                                <td>
+
+                                                    <?= htmlspecialchars(
+                                                        $student['roll_no']
+                                                    ); ?>
+
+                                                </td>
+
+
+                                                <td>
+
+                                                    <?= htmlspecialchars(
+                                                        $student['full_name']
+                                                    ); ?>
+
+                                                </td>
+
+
+                                                <td>
+
+                                                    <?= htmlspecialchars(
+                                                        $student['father_name']
+                                                    ); ?>
+
+                                                </td>
+
+
+                                                <td>
+
+                                                    <?= htmlspecialchars(
+                                                        $student['class_name'] ?? 'Not Assigned'
+                                                    ); ?>
+
+                                                </td>
+
+
+                                                <td>
+
+                                                    <?= htmlspecialchars(
+                                                        $student['gender']
+                                                    ); ?>
+
+                                                </td>
+
+
+                                                <td>
+
+                                                    <?= htmlspecialchars(
+                                                        $student['phone']
+                                                    ); ?>
+
+                                                </td>
+
+
+                                            </tr>
+
+
+                                    <?php
+
+                                        }
+
+
+                                    } else {
+
+                                    ?>
+
+
+                                        <tr>
+
+                                            <td colspan="7"
+                                                class="text-center">
+
+                                                No students found.
+
+                                            </td>
+
+                                        </tr>
+
+
+                                    <?php } ?>
+
+
+                                </tbody>
+
+
+                            </table>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
 
             </div>
 
         </div>
 
+
     </div>
 
 </div>
 
+
+<!-- =========================
+     BOOTSTRAP JS
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
+
 </html>

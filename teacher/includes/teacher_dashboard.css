@@ -1,0 +1,27 @@
+.main-content{
+    margin-left: 20%;
+    padding: 30px;
+    padding-top: 100px;
+}
+.dashboard-card{
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    border: 1px solid #e5e7eb;
+}
+.dashboard-card:hover {
+
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card h6 {
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+.dashboard-card h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0;
+}

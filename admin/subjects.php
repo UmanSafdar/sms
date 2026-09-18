@@ -1,4 +1,5 @@
 <?php
+include 'includes/auth.php';
         include '../db_connect.php';
         /* ===========================
    UPDATE SUBJECT
@@ -118,10 +119,10 @@ if (isset($_POST['add_subject'])) {
         <?php include 'includes/sidebar.php'; ?>
 
         <!-- Main Content -->
-        <div class="col-md-9 col-lg-10 p-4">
+        <div class="col-md-9 col-lg-10 p-4 offset-md-3 offset-lg-2 mt-5">
         <?php include 'includes/navbar.php'; ?>
             <!-- Add Subject Card -->
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4 pt-5">
                 <?php if(isset($_GET['updated'])){
                         echo'<div class="alert alert-success">Recode updated Successfully</div>'; 
                     } ?>

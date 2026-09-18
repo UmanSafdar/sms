@@ -214,31 +214,32 @@ $total_amount = $total_data['total_amount'];
 <body>
 
 
-<!-- =========================
-     NAVBAR
-========================= -->
 
-<?php include '../includes/navbar.php'; ?>
+
+
 
 
 <div class="container-fluid">
 
     <div class="row">
-
-
-        <!-- =========================
-             SIDEBAR
-        ========================= -->
-
-        <?php include '../includes/sidebar.php'; ?>
+<!-- =========================
+     NAVBAR
+========================= -->
+<?php include '../includes/navbar.php'; ?>
+      
 
 
         <!-- =========================
              MAIN CONTENT
         ========================= -->
 
-        <div class="col-md-9 col-lg-10">
+       
+  <!-- =========================
+             SIDEBAR
+        ========================= -->
 
+        <?php include '../includes/sidebar.php'; ?>
+         <div class="col-md-9 col-lg-10 offset-md-2 mt-5">
 
             <div class="container mt-5">
 

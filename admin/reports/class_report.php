@@ -95,13 +95,13 @@ $result = mysqli_query($conn, $query);
      NAVBAR
 ========================= -->
 
-<?php include '../includes/navbar.php'; ?>
+
 
 
 <div class="container-fluid">
 
     <div class="row">
-
+<?php include '../includes/navbar.php'; ?>
 
         <!-- =========================
              SIDEBAR
@@ -114,7 +114,7 @@ $result = mysqli_query($conn, $query);
              MAIN CONTENT
         ========================= -->
 
-        <div class="col-md-9 col-lg-10">
+        <div class="col-md-9 col-lg-10 offset-md-2 mt-5">
 
 
             <div class="container mt-5">
@@ -149,7 +149,7 @@ $result = mysqli_query($conn, $query);
 
                         <!-- EXPORT BUTTON -->
 
-                        <a href="export_class.php"
+                        <a href="export_class_report.php"
                            class="btn btn-success">
 
                             Export to Excel

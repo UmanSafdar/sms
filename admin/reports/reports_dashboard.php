@@ -1,4 +1,5 @@
 <?php
+include '../includes/auth.php';
 include '../../db_connect.php';
 ?>
 
@@ -21,15 +22,15 @@ include '../../db_connect.php';
             <?php include '../includes/sidebar.php'; ?>
 
             <!-- Main Content Area -->
-            <div class="col-md-9 col-lg-10 p-4">
+            <div class="col-md-9 col-lg-10 p-4 pt-5 offset-md-3 offset-lg-2 mt-5">
 
                 <!-- Navbar -->
                 <?php include '../includes/navbar.php'; ?>
 
                 <!-- Page Header -->
-                <div class="d-flex justify-content-between align-items-center my-4 bg-dark text-white">
-                    <h2>Reports</h2>
-                </div>
+                <div class="d-flex justify-content-between align-items-center my-4 bg-dark text-white rounded">
+                    <h2 class="text-center mx-auto">Reports</h2>
+                </div> 
 
                 <!-- Reports Grid -->
                 <div class="row g-4">
@@ -58,7 +59,7 @@ include '../../db_connect.php';
                                     View fee payments, pending fees and payment status.
                                 </p>
                                 <div>
-                                    <a href="fee_report.php" class="btn btn-success">View Report</a>
+                                    <a href="fee_report.php" class="btn btn-dark">View Report</a>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +74,7 @@ include '../../db_connect.php';
                                     View classes and total number of students in each class.
                                 </p>
                                 <div>
-                                    <a href="class_report.php" class="btn btn-warning text-white">View Report</a>
+                                    <a href="class_report.php" class="btn btn-primary text-white">View Report</a>
                                 </div>
                             </div>
                         </div>

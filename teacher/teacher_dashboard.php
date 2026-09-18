@@ -20,7 +20,7 @@ include '../db_connect.php';
     <!-- including css file -->
      <link 
         rel="stylesheet" 
-        href="teacher_dashboard.css"
+        href="includes/teacher_dashboard.css"
     >
     <title>Teacher Dashboard</title>
 </head>

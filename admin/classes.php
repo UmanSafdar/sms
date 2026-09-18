@@ -1,4 +1,5 @@
 <?php
+include 'includes/auth.php';
 include '../db_connect.php';
 
 /* ===========================
@@ -109,6 +110,7 @@ if (!$result) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Classes Management</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 <div class="container-fluid">
@@ -117,7 +119,7 @@ if (!$result) {
 
 <?php include 'includes/sidebar.php'; ?>
 
-<div class="col-md-9 col-lg-10 p-4">
+<div class="col-md-9 col-lg-10 p-4 offset-md-3 offset-lg-2 mt-5">
 <?php include 'includes/navbar.php'; ?>
 <?php
 
@@ -134,7 +136,7 @@ if(isset($_GET['updated'])){
 
 ?>
 
-<h2>Classes Management</h2>
+<h3 class="pt-5">Classes Management</h3>
 
 <p class="text-muted">
 Add and manage all classes in the system.
@@ -142,7 +144,7 @@ Add and manage all classes in the system.
 
 <div class="card shadow">
 
-<div class="card-header bg-primary text-white">
+<div class="card-header bg-dark text-white">
 <h5 class="mb-0">
 <?php echo isset($_GET['edit']) ? "Update Class" : "Add New Class"; ?>
 </h5>
@@ -201,7 +203,7 @@ name="<?php echo isset($_GET['edit']) ? 'update_class' : 'add_class'; ?>">
 
 <hr>
 
-<div class="card-header bg-primary text-white">
+<div class="card-header bg-success text-white">
 <h5 class="text-center">
 Classes
 </h5>

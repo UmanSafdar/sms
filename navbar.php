@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-expand-lg bg-primary ">
+    <nav class="navbar navbar-expand-lg  bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
     <img src="Images/smslogo.jpg" alt="Logo" width="40" height="40">
@@ -13,7 +13,7 @@
           <a class="nav-link active text-white" aria-current="page" href="index.php">Home</a> 
         </li>
          <li class="nav-item">
-          <a class="nav-link text-white" href="#">Logout</a>
+          <a class="nav-link text-white" href="login.php">Logout</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="login.php">Login</a>
