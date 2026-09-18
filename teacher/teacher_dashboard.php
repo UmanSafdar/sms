@@ -6,8 +6,6 @@ if(!isset($_SESSION['role'])|| $_SESSION['role'] != 'teacher'){
     exit();
 }
 include '../db_connect.php';
-include 'includes/navbar.php';
-include 'includes/sidebar.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,11 +20,46 @@ include 'includes/sidebar.php';
     <!-- including css file -->
      <link 
         rel="stylesheet" 
-        href="/my_sms/teacher/includes/teacher.css"
+        href="teacher_dashboard.css"
     >
     <title>Teacher Dashboard</title>
 </head>
 <body>
-    
+    <?php include 'includes/navbar.php';
+    include 'includes/sidebar.php';
+    ?>
+    <main class="main-content">
+        <div class="container-fluid">
+            <h2 class="fw-bold mb-1">Teacher Dashboard</h2>
+            <p class="text-muted mb-4">Welcome to Your Teacher Pannel</p>
+            <div class="row g-4">
+                <div class="col-md-6 col-xl-3">
+                    <div class="dashboard-card">
+                        <h6>Total Classes</h6>
+                        <h2>0</h2>
+                    </div>
+                </div>
+                 <div class="col-md-6 col-xl-3">
+                    <div class="dashboard-card">
+                        <h6>Total Subjectss</h6>
+                        <h2>0</h2>
+                    </div>
+                </div>
+                 <div class="col-md-6 col-xl-3">
+                    <div class="dashboard-card">
+                        <h6>Total Classes</h6>
+                        <h2>0</h2>
+                    </div>
+                </div>
+                 <div class="col-md-6 col-xl-3">
+                    <div class="dashboard-card">
+                        <h6>Total Classes</h6>
+                        <h2>0</h2>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+</main>
 </body>
 </html>
