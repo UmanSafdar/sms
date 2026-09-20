@@ -6,13 +6,25 @@ $query = "SELECT * FROM teachers WHERE user_id = $user_id";
 $result = mysqli_query($conn, $query);
 $teacher = mysqli_fetch_assoc($result);
 
-// echo $teacher['full_name'];
-// echo $teacher['qualification'];
-// echo $teacher['specialization'];
-// echo $teacher['phone'];
-// echo $teacher['salary'];
-// echo $teacher['joining_date'];
+//===========Update=============//
+if($_SERVER['REQUEST_METHOD']== "POST"){
+$full_name = $_POST['full_name'];
+$qualification = $_POST['qualification'];
+$specialization = $_POST['specialization'];
+$phone = $_POST['phone'];
+$salary = $_POST['salary'];
+$joining_date = $_POST['joining_date'];
 
+$update_profile = "UPDATE teachers SET 
+                    full_name = '$full_name',
+                    qualification = '$qualification',
+                    specialization = '$specialization',
+                    phone = '$phone',
+                    salary = '$salary',
+                    joining_date ='$joining_date'
+                WHERE user_id = $user_id";
+    $update_result = mysqli_query($conn,$update_profile);
+}
 
 ?>
 <!DOCTYPE html>
@@ -26,12 +38,17 @@ $teacher = mysqli_fetch_assoc($result);
 </head>
 <body>
      <?php include 'includes/navbar.php';?>
-     
+    
     <div class="container-fluid">
         <div class="row">
             <?php include 'includes/sidebar.php';?>
             
              <main class="col-md-9 col-lg-10 ms-auto p-4 pt-5 mt-5">
+                 <?php
+     if(isset($update_profile)){
+        ?> <div class="alert alert-success"><?php echo "Profile Updated Successfully"?></div>
+        <?php
+     }?>
                 <h2 class="text-center mb-4 bg-primary text-white">Edit Teacher Profile</h2>
     <form method="POST">
        
