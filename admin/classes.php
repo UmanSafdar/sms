@@ -136,7 +136,15 @@ if(isset($_GET['updated'])){
 
 ?>
 
-<h3 class="pt-5">Classes Management</h3>
+<div class="d-flex justify-content-between align-items-center pt-5">
+
+    <h3 class="mb-0">Classes Management</h3>
+
+    <a href="assign_teacher.php" class="btn btn-primary">
+        Assign Teacher
+    </a>
+
+</div>
 
 <p class="text-muted">
 Add and manage all classes in the system.
