@@ -54,11 +54,23 @@ $class_result = mysqli_query($conn, $class_sql);
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-5 mt-5">
 
             <h2 class="mb-4">Students Attendance</h2>
-            <form class="form">
+            <form class="form" method="GET">
                 <label class="form-label">Select Class</label>
-                <select  class="form-select mb-3">
-                        <option value="">Select Class</option>
-                    </select>
+                <select class="form-select">
+    <option value="">Select Class</option>
+
+    <?php
+    if(mysqli_num_rows($class_result) > 0){
+        while($class = mysqli_fetch_assoc($class_result)){
+    ?>
+        <option value="<?php echo $class['class_id']; ?>">
+            <?php echo $class['class_name']; ?>
+        </option>
+    <?php
+        }
+    }
+    ?>
+</select>
                                     <label class="form-label">Select Subject</label>
                                     <select  class="form-select mb-3">
                                             <option value="">Select Subject</option>
@@ -77,16 +89,7 @@ $class_result = mysqli_query($conn, $class_sql);
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>10</td>
-                            <td>A</td>
-                            <td>
-                                <select class="form-select">
-                                    <option value="">Select Status</option>
-                                <option value="present">Present</option>
-                                <option value="absent">Absent</option></select>
-                            </td> </tr>
+                           
 </tbody>
 </table>
 </div>
