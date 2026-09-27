@@ -56,7 +56,7 @@ $class_result = mysqli_query($conn, $class_sql);
             <h2 class="mb-4">Students Attendance</h2>
             <form class="form" method="GET">
                 <label class="form-label">Select Class</label>
-                <select class="form-select">
+                <select class="form-select" name="class_id">
     <option value="">Select Class</option>
 
     <?php
@@ -72,11 +72,12 @@ $class_result = mysqli_query($conn, $class_sql);
     ?>
 </select>
                                     <label class="form-label">Select Subject</label>
-                                    <select  class="form-select mb-3">
+                                    <select  class="form-select mb-3" name="subject_id">
                                             <option value="">Select Subject</option>
                                         </select>
                 <label class="form-label">Select Date</label>
-                    <input type="date" class="form-control mb-3">
+                    <input type="date" class="form-control mb-3" name="date">
+                    <button type="submit" class="btn btn-primary">Save Attendance</button>
             </form>
             <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped table-dark">
@@ -93,7 +94,7 @@ $class_result = mysqli_query($conn, $class_sql);
 </tbody>
 </table>
 </div>
-                    <button type="submit" class="btn btn-primary">Save Attendance</button>
+                    
 
 </main>
     </div>
