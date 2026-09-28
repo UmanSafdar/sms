@@ -20,3 +20,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_attendance'])) {
     $attendance_data = $_POST['attendance'] ?? [];
 
     if ($class_id > 0 && $subject_id > 0 && !empty($attendance_data)) {
+        foreach ($attendance_data as $student_id => $status) {
+
+    $student_id = (int)$student_id;
+
+    $status = mysqli_real_escape_string(
+        $conn,
+        strtolower($status)
+    );
+
+    if (in_array($status, ['present', 'absent'])) {
+
+        $sql = "INSERT INTO attendance
+                (student_id, subject_id, attendance_date, status)
+                VALUES
+                ($student_id, $subject_id, '$attendance_date', '$status')
+                ON DUPLICATE KEY UPDATE
+                status = '$status'";
+
+        mysqli_query($conn, $sql);
+    }
+}
