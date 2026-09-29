@@ -49,5 +49,6 @@ header(
 );
 
 exit();
+    }}
 header("Location: attendance.php");
 exit();
