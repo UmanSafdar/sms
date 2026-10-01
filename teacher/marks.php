@@ -70,14 +70,71 @@ $student_result = mysqli_query($conn, $student_sql);
                 Subject
             </label>
             <select name="subject_id" class="form-select" required>
+                <option value="">Select Subject</option>
             <?php if(mysqli_num_rows($subject_result) > 0){
                 while($subject = mysqli_fetch_assoc($subject_result)){ ?>
             <option value="<?php echo $subject['subject_id']?>">
                 <?php echo $subject['subject_name'];?>
             </option>
-            
+           <?php } ?>
             </select>
-           <?php }}?>
+            <?php
+                    }?>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">
+                Exam Type
+            </label>
+            <select name="exam_type" class="form-select">
+                <option value="">Select Subject</option>
+                <option value="Monthly Exam">Monthly Exam</option>
+                <option value="Midterm">Midterm</option>
+                <option value="Finalterm">Final Term</option>
+            </select>
+        </div class="mb-3">
+        <label class="form-label">Total Marks</label>
+        <input type="text"
+                name="total_marks"
+                placeholder="Enter Total Marks"
+                required
+                min="1"
+                class="form-control">
+        <div>
+            <div class="table-responsive mt-4">
+                <table class="table table-hover">
+                    <tr>
+                        <thead>
+                        <th>#</th>
+                        <th>Roll No</th>
+                        <th>Student Name</th>
+                        <th>Obtain Marks</th>
+                    </thead>
+</tr>
+                    <tbody>
+                        <?php 
+                        $counter = 1;
+                        if(mysqli_num_rows($student_result) > 0){
+                            while($student=mysqli_fetch_assoc($student_result)){ ?>
+                           <tr>
+                            <td><?php echo $counter;?></td>
+                            <td><?php echo $student['roll_no'];?></td>
+                            <td><?php echo $student['full_name'];?></td>
+                            <td><input type="text"
+                                        name="<?php echo $student['student_id'];?>"
+                                        class="form-control"
+                                        min="0"
+                                        requried>
+                                       </td> </tr>
+                          <?php    }
+
+                        } ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-dark" type="submit">Save Marks</button>
+            </div>
+
         </div>
     </main>
         </div>
