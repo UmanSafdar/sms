@@ -7,6 +7,19 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != 'teacher'){
 }
 //////=========== Including Database Connection===========
 include '../db_connect.php';
+
+if(isset($_POST['save_marks'])){
+    $subject_id = $_POST['subject_id'];
+    $exam_type = $_POST['exam_type'];
+    $total_marks = $_POST['total_marks'];
+    $marks = $_POST['marks'];
+    foreach($marks as $student_id => $obtained_marks){
+
+    
+    $Insert_sql = "INSERT INTO marks(student_id, subject_id, exam_type, obtain_marks, total_marks)
+                    Values($student_id, $subject_id, '$exam_type', $obtained_marks, $total_marks)";
+    $Insert_result = mysqli_query($conn, $Insert_sql);
+}}
 // =========Get Teacher Id using user id ============//
 $user_id = $_SESSION['user_id'];
 $select_sql = "SELECT teacher_id FROM teachers WHERE user_id= $user_id";
@@ -41,6 +54,7 @@ $student_sql = "SELECT student_id, full_name, roll_no
                 ORDER BY roll_no";
 $student_result = mysqli_query($conn, $student_sql);
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +69,16 @@ $student_result = mysqli_query($conn, $student_sql);
         <div class="row">
             <?php include 'includes/sidebar.php';?>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-5 mt-5">
+            <?php if(isset($Insert_result)){?>
+        <div class="alert alert-success">Marks are Saved Successfully</div>
+         <script>
+                        setTimeout(function(){
+                            window.location.href = 'marks.php';
+                        }, 2000);
+                    </script>
+        <?php }?>
         <h2 class="mb-4"> Students Marks </h2>
+        <form Method="POST">
         <div class="mb-3">
             <label class="form-label">
                 Class
@@ -119,11 +142,11 @@ $student_result = mysqli_query($conn, $student_sql);
                             <td><?php echo $counter;?></td>
                             <td><?php echo $student['roll_no'];?></td>
                             <td><?php echo $student['full_name'];?></td>
-                            <td><input type="text"
-                                        name="<?php echo $student['student_id'];?>"
+                            <td><input type="number"
+                                        name="marks[<?php echo $student['student_id'];?>]"
                                         class="form-control"
                                         min="0"
-                                        requried>
+                                        required>
                                        </td> </tr>
                           <?php    }
 
@@ -132,9 +155,9 @@ $student_result = mysqli_query($conn, $student_sql);
                 </table>
             </div>
             <div class="mt-3">
-                <button class="btn btn-dark" type="submit">Save Marks</button>
+                <button class="btn btn-dark" type="submit" name="save_marks">Save Marks</button>
             </div>
-
+            </form>
         </div>
     </main>
         </div>
