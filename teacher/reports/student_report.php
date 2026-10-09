@@ -7,8 +7,20 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != 'teacher'){
 }
 
 include '../../db_connect.php';  
-$class_sql = "SELECT class_id, class_name 
-                FROM classes";
+/// GETTING USER ID ///
+$user_id = $_SESSION['user_id'];
+// QUERY TO GET TEACHER ID BY USING USER ID
+$query = "SELECT teacher_id FROM
+                     teachers
+                   Where user_id = $user_id";
+    $result = mysqli_query($conn, $query);
+    $t = mysqli_fetch_assoc($result);
+    $teacher_id = $t['teacher_id'];
+$class_sql = "SELECT classes.class_id, classes.class_name,teacher_classes.teacher_id
+                FROM classes
+                left join teacher_classes
+                on teacher_classes.class_id = classes.class_id
+                WHERE teacher_id = $teacher_id";
 $class_result = mysqli_query($conn, $class_sql);
 
 $class_id = '';
