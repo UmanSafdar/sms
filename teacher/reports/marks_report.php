@@ -13,7 +13,7 @@ include '../../db_connect.php';
     $subjectId= (int) ($_GET['subject_id'] ?? 0);
     $examType = $_GET['exam_type'] ?? '';
 
-echo "Class ID received: " . $classId;
+
 
 /// GETTING USER ID ///
 $user_id = $_SESSION['user_id'];
@@ -76,11 +76,12 @@ if ($classId > 0 && $subjectId > 0 && $examType != '') {
                 visibility: hidden;
             }
 
-            #classTable,
-            #classTable *{
+            #printarea,
+            #printarea *{
                 visibility: visible;
             }
-            #classTable{
+            #printarea{
+                
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -159,13 +160,17 @@ if ($classId > 0 && $subjectId > 0 && $examType != '') {
                 <div class="d-flex align-item-center gap-2 mb-4">
                     <button class="btn btn-dark" type="submit" name="submit">Generate Result Report</button>
                     <a href="reports_dashboard.php" class="btn btn-dark">Back</a>
-                    <a href="export_marks_report.php?class_id=<?php echo $class_id;?>" class="btn btn-dark">Export to Excel</a>
-                    <button class="btn btn-dark" onclick="window.print()">Print</button>
+                    <a href="export_marks_report.php?class_id=<?php echo $classId; ?>&subject_id=<?php echo $subjectId; ?>&exam_type=<?php echo urlencode($examType); ?>"
+                    class="btn btn-dark">
+                        Export to Excel
+                    </a>                  
+                      <button type="button" class="btn btn-dark" onclick="window.print()">Print</button>
             </div>
                 </div>
                  
             </form>
             <?php if ($examType != '') { ?>
+            <div id="printarea">
     <h5 class="mb-3">
         Exam Type:
         <span class="badge bg-dark">
@@ -173,7 +178,7 @@ if ($classId > 0 && $subjectId > 0 && $examType != '') {
         </span>
     </h5>
 <?php } ?>
-            <table class="table table-dark table-hover table-striped">
+            <table class="table table-gray table-hover table-striped" id="classTable">
                <thead>
                 <tr>
                     <td>#</td>
@@ -208,7 +213,7 @@ if ($report_result && mysqli_num_rows($report_result) > 0) {
 }
 ?>
 </tbody>
-               
-            
+</table>
+</div>       
 </body>
 </html>

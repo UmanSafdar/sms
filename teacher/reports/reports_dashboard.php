@@ -1,4 +1,12 @@
+<?php
+session_start();
 
+if(!isset($_SESSION['role']) || $_SESSION['role'] != 'teacher'){
+    header("Location: ../login.php");
+    exit();
+}
+ include '../../db_connect.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +50,7 @@
                                     View students attendance information.
                                 </p>
                                 <div>
-                                    <a href="attendance_report.php" class="btn btn-primary">View Report</a>
+                                    <a href="attendance_report.php?class_id=" class="btn btn-primary">View Report</a>
                                 </div>
                             </div>
 

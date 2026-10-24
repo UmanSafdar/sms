@@ -49,10 +49,10 @@ include 'includes/navbar.php';
 
         <?php include 'includes/sidebar.php'; ?>
 
-        <div class="col-md-9 col-lg-10">
-
-            <div class="card-header bg-primary text-white">
-    <h2 class="mb-0">Update Fee</h2>
+        <div class="col-md-9 col-lg-10 p-4 offset-md-3 offset-lg-2 mt-5">
+<br>
+            <div class="card-header bg-primary text-white p-2 rounded ">
+    <h2>Update Fee</h2>
 </div>
 
             <div class="card">

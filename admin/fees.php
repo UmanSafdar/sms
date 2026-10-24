@@ -48,7 +48,7 @@ $result = mysqli_query($conn, $query);
 
                     <h2 class="text-center" >Fee Management</h2>
 
-                    <a href="add_fee.php mx-auto" class="btn btn-primary">
+                    <a href="add_fee.php" class="btn btn-primary">
                         Add Fee
                     </a>
 

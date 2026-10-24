@@ -23,8 +23,9 @@ $query = "SELECT teacher_id FROM
      $class_id = '';
    if(isset($_GET['class_id'])){
     
-        $class_id = (int)$_GET['class_id'];
+        $class_id = $_GET['class_id'];
    }
+   
   if($class_id > 0) {
    $report_sql = " SELECT attendance.status,attendance.attendance_date,students.roll_no,students.full_name,students.father_name,subjects.subject_name,classes.class_name
 FROM attendance
@@ -46,7 +47,6 @@ JOIN classes
 ON subjects.class_id = classes.class_id";
 }
 $report_result = mysqli_query($conn, $report_sql);
-
    ?>
 
    <!DOCTYPE html>
@@ -82,6 +82,7 @@ $report_result = mysqli_query($conn, $report_sql);
                 <?php include '../includes/sidebar.php'; ?>
         <main class="col-md-9 ms-sm-auto col-lg-10 offset-md-3 offset-lg-2 mt-5 pt-4 mb-5">
             <br>
+            <h2 class="mb-4 text-center rounded bg-dark text-white">Students Attendance Report</h2>
             <form method="GET">
                 <div class="d-flex align-item-center gap-4">
                     <div >
@@ -112,6 +113,7 @@ $report_result = mysqli_query($conn, $report_sql);
                 </div>
                  
             </form>
+            
             <table class="reponsive table table-hover table-striped" id="classTable">
                 
                 
@@ -130,6 +132,7 @@ $report_result = mysqli_query($conn, $report_sql);
                 <?php 
                 $counter =1;
                 if(mysqli_num_rows($report_result)>0){
+                   
                     while($report = mysqli_fetch_assoc($report_result)){
                         ?>
                         <tr>

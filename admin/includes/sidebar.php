@@ -41,7 +41,7 @@ $base_url = "/my_sms/admin/";
             Fees 
         </a> 
 
-        <a href="<?php echo $base_url; ?>reports/reports_dashboard.php" 
+        <a href="<?php echo $base_url; ?>/reports/reports_dashboard.php" 
            class="list-group-item list-group-item-action sidebar-link"> 
             Reports 
         </a> 

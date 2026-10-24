@@ -50,7 +50,7 @@ include 'includes/navbar.php';
 
         <?php include 'includes/sidebar.php'; ?>
 
-        <div class="col-md-9 col-lg-10">
+        <div class="d-flex justify-content-between align-items-center mb-4 p-2 bg-dark text-white mt-5 rounded">
 
             <div class="card-header bg-primary text-white">
     <h2 class="mb-0">Add Fee</h2>

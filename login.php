@@ -105,6 +105,11 @@
                             Login
                         </button>
                     </div>
+                    <div class=" mt-3">
+                <a href="forget_password.php">
+                Forget Password
+</a>
+</div>
 
                 </form>
 

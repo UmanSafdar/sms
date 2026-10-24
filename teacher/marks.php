@@ -86,7 +86,7 @@ $student_result = mysqli_query($conn, $student_sql);
             <input type="text"
             class="form-control"
             value = "<?php echo $class_Name;?>"
-            readonly>
+            >
         </div>
         <div class="mb-3">
             <label class="form-label">

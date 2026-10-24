@@ -62,7 +62,7 @@ if(isset($_POST['student_update'])){
         <!-- Sidebar -->
         <?php include 'includes/sidebar.php'; ?>
         <!-- Main Content -->
-        <div class="col-md-9 col-lg-10 p-4">
+        <div class="col-md-9 col-lg-10 p-4 offset-md-3 offset-lg-2 mt-5">
         <?php include 'includes/navbar.php'; ?>
             <div class="container-fluid px-4 py-4">
 

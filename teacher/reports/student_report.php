@@ -39,8 +39,7 @@ $class_id = '';
              $student_sql = "SELECT students.roll_no,students.full_name,students.father_name,
                     students.gender,students.phone,classes.class_name FROM students
                     LEFT JOIN classes
-                    ON classes.class_id = students.class_id
-                    ORDER BY class_name ASC";
+                    ON classes.class_id = students.class_id";
     $student_result = mysqli_query($conn, $student_sql);
    }
                  

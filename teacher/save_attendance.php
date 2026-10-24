@@ -42,11 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_attendance'])) {
     }
 }
 header(
-    "Location: attendance.php?class_id=$class_id
-    &subject_id=$subject_id
-    &date=$attendance_date
-    &msg=success"
-);
+    "Location: attendance.php?class_id=$class_id&subject_id=$subject_id&date=$attendance_date&msg=success");
 
 exit();
     }}
