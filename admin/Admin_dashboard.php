@@ -16,6 +16,24 @@
         $sql = "SELECT Id, Email, Role FROM users WHERE status = 'pending'";
         $result = mysqli_query($conn, $sql);
 
+// Count students
+$students_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM students");
+$students = mysqli_fetch_assoc($students_result)['total'];
+
+// Count teachers
+$teachers_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM teachers");
+$teachers = mysqli_fetch_assoc($teachers_result)['total'];
+
+// Count classes
+$classes_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM classes");
+$classes = mysqli_fetch_assoc($classes_result)['total'];
+
+// Count subjects
+$subjects_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM subjects");
+$subjects = mysqli_fetch_assoc($subjects_result)['total'];
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +51,7 @@
         <div class="col-md-9 col-lg-10 p-4 mt-0 offset-md-3 offset-lg-2 mt-5">
  <div class="container ">
 
-<div class="d-flex justify-content-between align-items-center my-4 bg-dark text-white rounded text-center mx-auto">
+<div class="d-flex justify-content-between align-items-center my-4 p-4 bg-dark text-white rounded text-center mx-auto">
                 <h2 class="mb-4 text-center">Dashboard</h2>
 </div>
                 <div class="row g-3">
@@ -41,7 +59,7 @@
                     <div class="col-md-3">
                         <div class="card text-bg-primary">
                             <div class="card-body">
-                                <h3>150</h3>
+                                <h3><?php echo $students;?></h3>
                                 <p>Total Students</p>
                             </div>
                         </div>
@@ -50,7 +68,7 @@
                     <div class="col-md-3">
                         <div class="card text-bg-success">
                             <div class="card-body">
-                                <h3>20</h3>
+                                <h3><?php echo $teachers;?></h3>
                                 <p>Total Teachers</p>
                             </div>
                         </div>
@@ -59,7 +77,7 @@
                     <div class="col-md-3">
                         <div class="card text-bg-dark">
                             <div class="card-body">
-                                <h3>10</h3>
+                                <h3><?php echo $classes;?></h3>
                                 <p>Total Classes</p>
                             </div>
                         </div>
@@ -68,7 +86,7 @@
                     <div class="col-md-3">
                         <div class="card text-bg-info">
                             <div class="card-body">
-                                <h3>35</h3>
+                                <h3><?php echo $subjects;?></h3>
                                 <p>Total Subjects</p>
                             </div>
                         </div>
@@ -76,45 +94,6 @@
 
                 </div>
 
-                <div class="card mt-4">
-                    <div class="card-header">
-                        Recent Activities
-                    </div>
-
-                    <div class="card-body">
-
-                        <table class="table table-striped">
-
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Activity</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>21-06-2026</td>
-                                    <td>Student Added</td>
-                                </tr>
-
-                                <tr>
-                                    <td>21-06-2026</td>
-                                    <td>Attendance Submitted</td>
-                                </tr>
-
-                                <tr>
-                                    <td>21-06-2026</td>
-                                    <td>Fee Received</td>
-                                </tr>
-                            </tbody>
-
-                        </table>
-
-                    </div>
-                </div>
-
-            </div>
             <div class="card-body">
                 <h5 style="text-align: center;"> Registeration Requests</h5>
                 <table class="table table-striped">
