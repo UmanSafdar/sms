@@ -1,9 +1,7 @@
 <?php
-
-
-
         session_start();
         include 'db_connect.php';
+        $message = '';
         //checking login info is submit
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             // getting form data and removing extra spaces
@@ -11,16 +9,20 @@
             $pswd = trim($_POST['pswd']); 
         // checking that field are filled
         if(empty($email) || empty($pswd)){
-            echo "Please fill all fields";
-            exit();
+            $message = "Please fill all fields";
+            
         }
+        else{
         $sql = "SELECT * FROM users WHERE Email = '$email'";
         $result = mysqli_query($conn, $sql);
         // checking email id exits in database or not
         if(mysqli_num_rows($result)==0){
-            echo "user does not exist";
-            exit();
+             $message ="user does not exist";
+            
         }
+        else{
+
+       
         
             $row = mysqli_fetch_assoc($result);
         
@@ -28,12 +30,11 @@
         // password verifcation
         if(password_verify($pswd, $row['Password'])){
             // Check if the account has been approved by the admin
-            if ($row['status'] !== 'approved') {
-                echo "Your account is currently pending admin approval.";
-                exit();}
             
-        // storing user info by using session
-        
+            if ($row['status'] !== 'approved') {
+                $message = "Your account is currently pending admin approval.";
+               }
+        else{ // storing user info by using session
         $_SESSION['email'] = $row['Email'];
         $_SESSION['role'] = $row['Role'];
         $_SESSION['user_id'] = $row['Id'];
@@ -49,13 +50,12 @@
             header("Location: admin/Student_dashboard.php");
         exit();
         }
-            
+        }   
         }
         else{
-    echo "Incorrect Password";
-    exit();
-}
- }
+            $message = "Wrong Password";
+        }
+ }}}
 ?>
 
 
@@ -74,10 +74,20 @@
 <body>
     <?php
     
-    include 'navbar.php'
-    ?>
- <h1 class="text-center mt-5 fs-1">School Management System</h1>
+    include 'navbar.php';
+     if($message){?>
+ <div id="php_alert" class= "alert alert-danger"><?php echo $message;?></div> 
+ <?php } ?>
+ <script>
+    setTimeout(() => {
+        let x = document.getElementById("php_alert");
+        if(x){
+            x.style.display = 'none';
+        }
+    }, 3000);
+ </script>
 
+ <h1 class="text-center mt-5 fs-1">School Management System</h1>
 <div class="container mt-5">
 
     <div class="row justify-content-center">
@@ -106,7 +116,7 @@
                         </button>
                     </div>
                     <div class=" mt-3">
-                <a href="forget_password.php">
+                <a href="forgot_password.php">
                 Forget Password
 </a>
 </div>
