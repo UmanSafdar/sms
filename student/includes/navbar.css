@@ -1,0 +1,24 @@
+/* --- Global Body Background --- */
+body {
+    background-color: rgb(253, 251, 240); /* Elegant off-white background */
+}
+
+/* --- Top Navbar Styling --- */
+.navbg {
+    background-color: #850000; /* Deep crimson/maroon navbar */
+    padding: 15px;
+}
+
+/* Base style for navbar links */
+.navbg a {
+    display: inline-block; /* Required for transform scale to work */
+    color: rgb(254, 253, 253);
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Smooth zoom on navbar hover */
+.navbg a:hover {
+    transform: scale(1.08); /* Distinct 8% zoom for the top links */
+    color: rgb(253, 251, 240); /* Shifts to a soft tint on hover */
+}
