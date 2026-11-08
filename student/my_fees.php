@@ -8,8 +8,50 @@ include'../db_connect.php';
 if(!$conn){
     die("Failed: ".mysqli_error($conn));
 }
+$user_id = $_SESSION['user_id']; 
+$query = "SELECT student_id FROM students WHERE user_id = $user_id";
+$result = mysqli_query($conn, $query);
+if(!$result){
+    die("Failed: ".mysqli_error($conn));
+}
+$row = mysqli_fetch_assoc($result);
+$student_id = $row['student_id'];
 
+$student_sql = "SELECT * FROM fees Where student_id = $student_id";
+$student_result = mysqli_query($conn, $student_sql);
+if(!$student_result){
+    die("Failed: ".mysqli_error($conn));
+}
+$total_amount_sql = "SELECT SUM(amount) as total_fee
+                     FROM fees WHERE student_id = $student_id";
+$total_fees_result = mysqli_query($conn, $total_amount_sql);
+if(!$total_fees_result){
+    die("Failed: ".mysqli_error($conn));
+}
+$x = mysqli_fetch_assoc($total_fees_result);
+$total_fees = $x['total_fee'];
+
+$paid_amount_sql = "SELECT SUM(amount) as paid_fee
+                     FROM fees WHERE student_id = $student_id
+                     AND status = 'Paid'";
+$paid_fees_result = mysqli_query($conn, $paid_amount_sql);
+if(!$paid_fees_result){
+    die("Failed: ".mysqli_error($conn));
+}
+$y = mysqli_fetch_assoc($paid_fees_result);
+$paid_fees = $y['paid_fee'];
+
+$pending_amount_sql = "SELECT SUM(amount) as pending_fee
+                     FROM fees WHERE student_id = $student_id
+                     AND status = 'Unpaid'";
+$pending_fees_result = mysqli_query($conn, $pending_amount_sql);
+if(!$pending_fees_result){
+    die("Failed: ".mysqli_error($conn));
+}
+$z = mysqli_fetch_assoc($pending_fees_result);
+$pending_fees = $z['pending_fee'];
 ?>
+
 
 
 <!DOCTYPE html>
@@ -32,24 +74,31 @@ if(!$conn){
             <div class="col-md-4">
     <div class="card shadow-sm border-0">
         <div class="card-body text-center hover">
-            <h5>Total Fees</h5>
-            <h3>0</h3>
+            <h5><strong>Total Fees</strong></h5>
+            <h6><?php echo $total_fees;?></h6>
         </div>
     </div>
 </div>
     <div class="col-md-4">
     <div class="card shadow-sm border-0">
         <div class="card-body text-center">
-            <h5>Paid Fees</h5>
-            <h3>0</h3>
+            <h5><strong>Paid Fees</strong></h5>
+            <h6><?php echo $paid_fees;?></h6>
         </div>
     </div>
 </div>
 <div class="col-md-4">
     <div class="card shadow-sm border-0">
         <div class="card-body text-center">
-            <h5>Pending Fees</h5>
-            <h3>0</h3>
+            <h5><strong>Pending Fees</strong></h5>
+            <h6><?php if($pending_fees > 0)
+                {
+                    echo $pending_fees;
+                }
+                else{
+                    echo"No pending Fees";
+                }
+                ?></h6>
         </div>
     </div>
 </div>
@@ -67,30 +116,23 @@ if(!$conn){
                         <th>Status</th>                    </tr>
                 </thead>
                 <tbody>
+                    <?php 
+                        $counter =1;
+                        if(mysqli_num_rows($student_result) >0){
+                        while($r = mysqli_fetch_assoc($student_result)){?>
                     <tr>
-                        <td>1</td>
-                        <td>January</td>
-                        <td>12500</td>
-                        <td>Pending</td>
+                        <td><?php echo $counter;?></td>
+                        <td><?php echo $r['fee_month'];?></td>
+                        <td><?php echo $r['amount'];?></td>
+                        <td><?php echo $r['status'];?></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Feburary</td>
-                        <td>2500</td>
-                        <td>Paid</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>March</td>
-                        <td>1500</td>
-                        <td>Pending</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>April</td>
-                        <td>3500</td>
-                        <td>Paid</td>
-                    </tr>
+                    <?php
+                    $counter++;
+                        }}
+                        else{
+                        echo"<tr <td>colspan='4' class=' text-center'>No student record found!</td></tr>";
+                           
+                            }?>
                 </tbody>
             </table>
         </div>
