@@ -74,6 +74,16 @@ $percentage = round(($present['total_present'] / $total['total_attendance'] )* 1
 else{
     $percentage = 0;
 }
+$attendance_table_sql = " SELECT attendance.attendance_date,attendance.status,
+                            subjects.subject_name FROM attendance 
+                            JOIN subjects 
+                            on subjects.subject_id = attendance.subject_id
+                            WHERE attendance.student_id = $student_id
+                            ORDER BY attendance.attendance_date DESC";
+$attendance_table_result = mysqli_query($conn, $attendance_table_sql);
+if(!$attendance_table_result){
+    die("Failed: ".mysqli_error($conn));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,7 +106,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
         <div class="row">
         
 <main class="col-md-9 col-lg-10 offset-md-3 offset-lg-2 mt-5 border border-light rounded-4 shadow-sm p-3 bg-white min-vh-100">            <div class="container-fluid mt-5">
-                <h2 class="fw-bold mb-3 rounded text-center text-white bg-dark p-4">Student Attendance</h2>
+                <h2 class="fw-bold mb-3 rounded text-center text-white bg-dark bg-gradient p-4">Student Attendance</h2>
                 <p class="text-muted mb-4">Student Attendance Summary </p>
                     <?php if (!$has_attendance): ?>
                         <div class="alert alert-info mt-3">
@@ -111,7 +121,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
                     <div class="card-body ">
                        
                             <h6 class="card-title fw-bold">
-                                 <i class="bi bi-calendar-check text-primary me-2"></i>
+                                 <i class="bi bi-calendar-check text-primary me-2 fs-2"></i>
                                 <strong>Total Attendance</strong></h6>
                            <p class="card-text fw-bold fs-3"><?php echo$total['total_attendance'];?></p> 
                         
@@ -124,7 +134,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
                     <div class="card-body ">
                        
                             <h6 class="card-title fw-bold">
-                            <i class="bi bi-check-circle text-success me-2"></i>    
+                            <i class="bi bi-check-circle text-success me-2 fs-2"></i>    
                             <strong>Total Present</strong></h6>
                            <p class="card-text fw-bold fs-3"><?php echo$present['total_present'];?></p> 
                         
@@ -137,7 +147,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
                     <div class="card-body ">
                        
                             <h6 class="card-title fw-bold">
-                            <i class="bi bi-x-circle text-danger me-2"></i>    
+                            <i class="bi bi-x-circle text-danger me-2 fs-2"></i>    
                             <strong>Total Absent</strong></h6>
                            <p class="card-text fw-bold fs-3"><?php echo$absent['total_absents'];?></p> 
                         
@@ -150,7 +160,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
                     <div class="card-body ">
                        
                             <h6 class="card-title fw-bold">
-                            <i class="bi bi-graph-up-arrow text-info me-2"></i>    
+                            <i class="bi bi-graph-up-arrow text-info me-2 fs-2"></i>    
                             <strong>Attendance Percentage</strong></h6>
                            <p class="card-text fw-bold fs-3"><?php echo $percentage;?>
                            <span class="badge bg-primary">%</span></p> 
@@ -160,11 +170,45 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
                 </div>
                     
                 
-</div>
+
                 </div>
             </div>
+            <div class="col-md-12 mt-3">
+                <h2 class="bg-dark bg-gradient mb-4 bg-dark p-2 text-white rounded text-center mx-auto">My Attendance Record</h2>
+            <table class="table table-hover border">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Date</th>
+                        <th>Subject</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $counter =1;
+                    if(mysqli_num_rows($attendance_table_result) >0){
+                        while($attendance = mysqli_fetch_assoc($attendance_table_result)){
+                            ?>
+                            <tr>
+                                <td><?php echo $counter;?></td>
+                                <td><?php echo $attendance['attendance_date'];?></td>
+                                <td><?php echo $attendance['subject_name'];?></td>
+                                <td><?php echo $attendance['status'];?></td>
+                            </tr>
+                            <?php
+                            $counter++;
+                        }
+                    }
+                    else{
+                        echo"<tr <td>colspan='4' class=' text-center'>No attendance record found!</td></tr>";
+                           
+                            }?>
+                </tbody>
+            </table>
             </div>
         </main>
+        </div>
         </div>
       
 
