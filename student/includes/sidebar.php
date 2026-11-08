@@ -26,7 +26,7 @@ $base_url = "/my_sms/student";
             Attendance 
         </a> 
 
-        <a href="<?php echo $base_url; ?>/my_results.php" 
+        <a href="<?php echo $base_url; ?>/my_result.php" 
            class="list-group-item list-group-item-action sidebar-link"> 
             My Results
         </a> 

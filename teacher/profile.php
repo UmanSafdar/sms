@@ -43,10 +43,10 @@ $teacher = mysqli_fetch_assoc($result);
 <body>
 
     <?php include 'includes/navbar.php'; ?>
-
+    <?php include 'includes/sidebar.php'; ?>
     <div class="container-fluid profile-container">
         <div class="row">
-            <?php include 'includes/sidebar.php'; ?>
+            
 
             <main class="col-md-9 col-lg-10 ms-auto p-4">
                 <br><br><br>
@@ -60,9 +60,12 @@ $teacher = mysqli_fetch_assoc($result);
                         <div class="card profile-card h-100">
                             <div class="card-body">
                                 <h4 class="profile-card-title">
-                                    <strong>Teacher Name: </strong>
+                                    Personal Information
+                                    </h4>
+                                    <p class="profile-info">
+                                        <strong>Teacher Name: </strong>
                                     <?php echo $teacher['full_name']; ?>
-                                </h4>
+                                </p>
                                 <p class="profile-info">
                                     <strong>Email: </strong>
                                     <?php echo $teacher['Email']; ?>

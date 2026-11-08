@@ -158,7 +158,7 @@ if ($classId > 0 && $subjectId > 0 && $examType != '') {
                     </select>
                 </div>
                 <div class="d-flex align-item-center gap-2 mb-4">
-                    <button class="btn btn-dark" type="submit" name="submit">Generate Result Report</button>
+                    <button class="btn btn-dark" type="submit" name="submit">Generate Report</button>
                     <a href="reports_dashboard.php" class="btn btn-dark">Back</a>
                     <a href="export_marks_report.php?class_id=<?php echo $classId; ?>&subject_id=<?php echo $subjectId; ?>&exam_type=<?php echo urlencode($examType); ?>"
                     class="btn btn-dark">

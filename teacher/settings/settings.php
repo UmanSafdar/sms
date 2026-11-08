@@ -64,10 +64,11 @@ if(isset($_POST['change_password'])){
 </head>
 <body>
 
-<?php include '../includes/navbar.php';?>
+<?php include '../includes/navbar.php';
+ include '../includes/sidebar.php';?>
 <div class="container-fluid">
     <div class="row">
-<?php include '../includes/sidebar.php';?>
+
  
 <main class="col-md-9 ms-sm-auto col-lg-10 offset-md-3 offset-lg-2 mt-5 pt-4 mb-5">
     <br>

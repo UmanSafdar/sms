@@ -19,7 +19,7 @@
 
         <div class="ms-auto">
             <span class="badge bg-dark badge-md">
-                Teacher
+                Student
             </span>
         </div>
 

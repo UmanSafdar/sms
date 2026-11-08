@@ -16,10 +16,11 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] != 'teacher'){
     <title>Reports Dashboard</title>
 </head>
 <body>
-    <?php include '../includes/navbar.php';?>
+    <?php include '../includes/navbar.php';
+     include '../includes/sidebar.php';?>
     <div class="container-fluid">
         <div class="row mb-4">
-        <?php include '../includes/sidebar.php';?>
+        
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-5 mt-5">
                 <h2 class="mt-4"> Report Dashboard </h2>
 

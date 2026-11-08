@@ -49,11 +49,11 @@ include 'includes/navbar.php';
     <div class="row">
 
         <?php include 'includes/sidebar.php'; ?>
+    <br>
+        <div class="col-md-9 col-lg-10 offset-md-col-lg-10 offset-md-3 offset-lg-2 mt-5 ">
 
-        <div class="d-flex justify-content-between align-items-center mb-4 p-2 bg-dark text-white mt-5 rounded">
-
-            <div class="card-header bg-primary text-white">
-    <h2 class="mb-0">Add Fee</h2>
+            <div class="card-header bg-primary text-white rounded">
+    <h2 class="mt-5 p-2">Add Fee</h2>
 </div>
 
             <div class="card">

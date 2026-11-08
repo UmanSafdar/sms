@@ -43,10 +43,11 @@ $student_result = mysqli_query($conn, $student_sql);
 </head>
 <body>
     <!-- // including navbar  -->
-    <?php include 'includes/navbar.php';?>
+    <?php include 'includes/navbar.php';
+     include 'includes/sidebar.php';?>
     <div class="container-fluid">
         <div class="row">
-            <?php include 'includes/sidebar.php';?>
+            
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-5 mt-5">
                 <h2 class="mb-4">My Students</h2>
 

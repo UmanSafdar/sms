@@ -24,14 +24,14 @@ include '../db_connect.php';
 <body>
 
     <?php include 'includes/navbar.php'; ?>
-
+    <?php include 'includes/sidebar.php'; ?>
     <div class="container-fluid">
         <div class="row">
-        <?php include 'includes/sidebar.php'; ?>
+        
 
-        <main class="col-md-9 col-lg-10 offset-md-3 offset-lg-2">
-            <div class="container-fluid">
-                <h2 class="fw-bold mb-1">Student Dashboard</h2>
+        <main class=" col-md-9 col-lg-10 offset-md-3 offset-lg-2 mt-5 border border-light rounded-4 shadow-sm p-4 bg-white">
+            <div class="container-fluid mt-5">
+                <h2 class="fw-bold mb-1 bg-dark text-white rounded text-center p-3">Student Dashboard</h2>
                 <p class="text-muted mb-4">Welcome to Your Student Panel</p>
 
                 <div class="row g-4">

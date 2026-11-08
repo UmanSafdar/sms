@@ -64,10 +64,11 @@ $student_result = mysqli_query($conn, $student_sql);
     <title>Marks</title>
 </head>
 <body>
-    <?php include 'includes/navbar.php'; ?>
+    <?php include 'includes/navbar.php'; 
+     include 'includes/sidebar.php';?>
     <div class="container-fluid">
         <div class="row">
-            <?php include 'includes/sidebar.php';?>
+            
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-5 mt-5">
             <?php if(isset($Insert_result)){?>
         <div class="alert alert-success">Marks are Saved Successfully</div>
@@ -83,10 +84,17 @@ $student_result = mysqli_query($conn, $student_sql);
             <label class="form-label">
                 Class
             </label>
-            <input type="text"
-            class="form-control"
-            value = "<?php echo $class_Name;?>"
-            >
+             <select name="class_id" class="form-select" required>
+                <option value="">Select Class</option>
+            <?php if(mysqli_num_rows($class_result) > 0){
+                while($class = mysqli_fetch_assoc($class_result)){ ?>
+            <option value="<?php echo $class['class_id']?>">
+                <?php echo $class['class_name'];?>
+            </option>
+           <?php } ?>
+            </select>
+            <?php
+                    }?>
         </div>
         <div class="mb-3">
             <label class="form-label">

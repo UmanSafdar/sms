@@ -47,7 +47,7 @@
         exit();
         }
          if($row['Role']== "student"){
-            header("Location: admin/Student_dashboard.php");
+            header("Location: student/Student_dashboard.php");
         exit();
         }
         }   

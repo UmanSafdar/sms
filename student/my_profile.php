@@ -55,14 +55,15 @@ $row = mysqli_fetch_assoc($student_result);
 <body>
 
    <?php include 'includes/navbar.php'; ?>
+   <?php include 'includes/sidebar.php'; ?>
 
     <div class="container-fluid profile-container">
         <div class="row">
-            <?php include 'includes/sidebar.php'; ?>
+            
 
-           <main class="col-md-9 col-lg-10 offset-md-3 offset-lg-2 mt-5">
-                <br><br><br>
-                <h2 class="mb-4 profile-title">My Profile</h2>
+           <main class="col-md-9 col-lg-10 offset-md-3 offset-lg-2 mt-5 border border-light rounded-4 shadow-sm p-4 bg-white">
+               
+            <h2 class="mb-4 profile-title text-center text-white rounded bg-dark p-4">My Profile</h2>
 
                 <div class="row g-4">
 

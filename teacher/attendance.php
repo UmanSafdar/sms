@@ -76,11 +76,12 @@ if ($selected_class_id > 0 && $selected_subject_id > 0 && !empty($selected_date)
     <link rel="stylesheet" href="/my_sms/teacher/includes/sidebar.css">
 </head>
 <body>
-    <?php include 'includes/navbar.php'; ?>
+    <?php include 'includes/navbar.php';
+     include 'includes/sidebar.php'; ?>
 
     <div class="container-fluid">
         <div class="row">
-            <?php include 'includes/sidebar.php'; ?>
+            
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-5 mt-5">
                 <h2 class="mb-4">Students Attendance</h2>
