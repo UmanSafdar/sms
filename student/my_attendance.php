@@ -96,6 +96,7 @@ if(!$attendance_table_result){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
    <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link href="includes/attendance.css" rel="stylesheet">
 </head>
 <body>
 
@@ -114,11 +115,11 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
                         </div>
                     <?php endif; ?>
                
-                <div class="row g-3 bg-light border rounded p-3">
+                <div class="row g-3 bg-light border rounded p-3 ">
                      <!-- Total Attendance Card  -->
                     <div class="col-12 col-sm-6 col-xl-3 ">
-                        <div class="card shadow-sm border-0 ">
-                    <div class="card-body ">
+                        <div class="card shadow-sm mycard  ">
+                    <div class="card-body">
                        
                             <h6 class="card-title fw-bold">
                                  <i class="bi bi-calendar-check text-primary me-2 fs-2"></i>
@@ -130,7 +131,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 </div>
                     <!-- Total Present Card  -->
                     <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="card shadow-sm border-0">
+                        <div class="card shadow-sm  mycard">
                     <div class="card-body ">
                        
                             <h6 class="card-title fw-bold">
@@ -143,7 +144,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
                     <!-- Total absent Card  -->
                     <div class="col-12 col-sm-6 col-xl-3">
-                        <div class="card shadow-sm border-0">
+                        <div class="card shadow-sm  mycard">
                     <div class="card-body ">
                        
                             <h6 class="card-title fw-bold">
@@ -156,7 +157,7 @@ href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.m
 
                       <!-- Total absent Card  -->
                     <div class="col-12 col-sm-6 col-xl-3 ">
-                        <div class="card shadow-sm border-0">
+                        <div class="card shadow-sm mycard">
                     <div class="card-body ">
                        
                             <h6 class="card-title fw-bold">
