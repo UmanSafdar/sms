@@ -13,19 +13,21 @@ $query = "SELECT
             classes.class_name,
             classes.description,
             COUNT(students.user_id) AS total_students
+            
 
           FROM classes
 
           LEFT JOIN students
           ON classes.class_id = students.class_id
           AND students.profile_status = 'complete'
+          WHERE classes.status = 'active'
 
           GROUP BY
             classes.class_id,
             classes.class_name,
             classes.description
 
-          ORDER BY classes.class_name ASC";
+          ORDER BY classes.class_name DESC";
 
 
 $result = mysqli_query($conn, $query);
@@ -96,18 +98,19 @@ $result = mysqli_query($conn, $query);
 ========================= -->
 
 
-
-
-<div class="container-fluid">
-
-    <div class="row">
 <?php include '../includes/navbar.php'; ?>
-
-        <!-- =========================
+   <!-- =========================
              SIDEBAR
         ========================= -->
 
         <?php include '../includes/sidebar.php'; ?>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+
+     
 
 
         <!-- =========================
