@@ -17,7 +17,9 @@ $class_id = $_GET['class_id'] ?? '';
 
 $class_query = "SELECT * 
                 FROM classes 
-                ORDER BY class_name ASC";
+                WHERE classes.status = 'active'
+                ORDER BY class_name ASC
+                ";
 
 $class_result = mysqli_query($conn, $class_query);
 
@@ -39,7 +41,8 @@ $query = "SELECT
           LEFT JOIN classes
           ON students.class_id = classes.class_id
 
-          WHERE students.profile_status = 'complete'";
+          WHERE students.profile_status = 'complete'
+          AND classes.status = 'active'";
 
 
 // =========================
